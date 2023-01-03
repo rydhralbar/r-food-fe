@@ -1,0 +1,76 @@
+body {
+  overflow: hidden;
+}
+
+/* left side start*/
+.bg-login {
+  background-image: url(../images/background-image\(rl\).jpg);
+  background-size: cover;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.mrtext {
+  color: white;
+  margin-top: 10px;
+  margin-left: 28%;
+}
+
+.stoveimg {
+  height: 120px;
+}
+/* left side end */
+
+/* right side start */
+.login-form {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-form h1 {
+  font-family: "Inter";
+  font-size: 25px;
+  line-height: 36px;
+  display: flex;
+  justify-content: center;  
+  color: #EFC81A;
+  font-weight: 500;
+}
+
+.login-form p {
+  font-family: Inter;
+  font-size: 15px;
+  line-height: 40px;
+  display: flex;
+  justify-content: center;  
+  color: #8692A6;
+}
+
+.login-form .width-form {
+  width: 20rem;
+}
+
+.login-form .form-check-input:checked {
+  background-color: #EFC81A;
+  border-color: #EFC81A;
+}
+
+.login-form .forgot-pass {
+  text-decoration: none;
+  color: #999999;
+  font-size: 13px;
+  display: block;
+  text-align: right;
+}
+
+.login-form .sign-up a {
+  text-decoration: none;
+  color: #EFC81A;
+}
+
+
+/* right side end */

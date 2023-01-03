@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home | Food Recipe</title>
+
+    <!-- external css from Bootstrap -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
+      crossorigin="anonymous"
+    />
+
+    <!-- external css from repository -->
+    <link rel="stylesheet" href="../assets/styles/home.css" />
+  </head>
+  <body id="body">
+
+    <!-- navbar start -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+      <div class="container">
+        <div class="collapse navbar-collapse" id="navbarNav" style="margin-top: 7px;">
+          <ul class="navbar-nav">
+            <li class="nav-item me-5">
+              <a class="nav-link active me-5 nav-home" aria-current="page" href="#">Home</a>
+            </li>
+            <li class="nav-item me-5">
+              <a class="nav-link" href="./addrecipe.html">Add Recipe</a>
+            </li>
+            <li class="nav-item me-5">
+              <a class="nav-link" href="profile-myrecipe.html">Profile</a>
+            </li>
+          </ul>
+        </div>
+        <div style="display: flex; align-items: end;">
+          <img class="online-logo" src="../assets/images/online-logo.png"/>
+          <img class="rounded-circle me-3 mt-2" src="../assets/images/hydra-removebg-preview.png" style="width: 45px; z-index: 0;"/>
+          <a class="log-out" href="../index.html"><p>Log Out</p></a>
+        </div>
+      </div>
+    </nav>
+    <!-- navbar end -->
+
+    <!-- header start-->
+    <section id="header">
+      <!-- background yellow -->
+      <div class="overlay-background"></div>
+
+      <!-- content -->
+      <div class="container content">
+        <div class="row align-items-center">
+          <!-- side left -->
+          <div class="col-5">
+            <h1>Discover Recipe & Delicious Food</h1>
+            <div class="mt-4">
+              <input
+                type="text"
+                class="form-control form-control-lg"
+                id="form-search"
+                placeholder="Search Recipe..."
+              />
+            </div>
+          </div>
+          <!-- side right -->
+          <div class="col-6 offset-1 background-grid">
+            <img
+              src="../assets/images/food-on-plate.png"
+              class="main-background"
+              width="600px"
+            />
+            <!-- background header -->
+            <img
+              src="../assets/images/lettuce.png"
+              class="background-1"
+              width="500px"
+            />
+            <img
+              src="../assets/images/polkadot.png"
+              class="background-2"
+              width="500px"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- header end -->
+
+    <!-- new recipe start -->
+    <section id="new-recipe">
+      <!-- title -->
+      <div class="container">
+        <h2 class="title">New Recipe</h2>
+      </div>
+
+      <!-- background -->
+      <div class="background-overlay"></div>
+      <!-- content -->
+      <div class="container">
+        <div class="row align-items-center">
+          <!-- left side -->
+          <div class="col-6">
+            <img
+              src="../assets/images/risotto.jpg"
+              width="80%"
+              height="500px"
+              class="main-image"
+            />
+          </div>
+
+          <!-- right side -->
+          <div class="col-5 offset-1">
+            <h2>
+              Risotto <br />
+              (Quick & Easy)
+            </h2>
+
+            <p>
+              Master this collection of classic Italian risotto recipes. Try autumnal pumpkin and butternut squash, or the winning standby combination of chorizo & pea risotto.
+            </p>
+            <a href="./detailrecipe(log).html"><button type="button" class="btn btn-warning">See More</button></a>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- new recipe end -->
+
+    <!-- popular recipe start -->
+    <section id="popular-recipe">
+      <div class="container">
+        <!-- title -->
+        <div class="container">
+          <h2 class="title">Popular Recipe</h2>
+        </div>
+
+        <!-- recipe list -->
+        <div class="grid-wrapper">
+          <div class="clickable-image">
+            <img
+              src="../assets/images/chicken-kare.jpg"
+              height="80%"
+              width="80%"
+            />
+            <h2 class="image-title">
+              Chiken Kare
+            </h2>
+          </div>
+          <div class="clickable-image">
+            <img
+              src="../assets/images/bomb-chicken.jpg"
+              height="80%"
+              width="80%"
+            />
+            <h2 class="image-title">
+              Bomb Chicken
+            </h2>
+          </div>
+          <div class="clickable-image">
+            <img
+              src="../assets/images/coffee-lava-cake.jpg"
+              height="80%"
+              width="80%"
+            />
+            <h2 class="image-title">
+              Coffee Lava Cake
+            </h2>
+          </div>
+          <div class="clickable-image">
+            <img
+              src="../assets/images/sugar-salmon.jpg"
+              height="80%"
+              width="80%"
+            />
+            <h2 class="image-title">
+              Sugar Salmon
+            </h2>
+          </div>
+          <div class="clickable-image">
+            <img
+              src="../assets/images/banana-smoothie-pop.jpg"
+              height="80%"
+              width="80%"
+            />
+            <h2 class="image-title">
+              Banana Smoothie Pop
+            </h2>
+          </div>
+          <div class="clickable-image">
+            <img
+              src="../assets/images/indian-salad.jpg"
+              height="80%"
+              width="80%"
+            />
+            <h2 class="image-title">
+              Indian Salad
+            </h2>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- popular recipe end -->
+
+        <!-- pagination start -->
+        <nav aria-label="..." style="display: flex; justify-content: center; margin-bottom: 2rem;">
+          <ul class="pagination">
+            <li class="page-item previous">
+              <span class="page-link">Previous</span>
+            </li>
+            <li class="page-item active"><span class="page-link">1</span></li>
+            <li class="page-item" aria-current="page">
+              <a class="page-link" href="#">2</a>
+            </li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item">
+              <a class="page-link" href="#">Next</a>
+            </li>
+          </ul>
+        </nav>
+        <!-- pagination end -->
+
+    <!-- footer start -->
+    <footer id="footer">
+      <div>
+        <h2>Eat, Cook, Repeat</h2>
+        <p>Share Your Best Recipe By Uploading Here !</p>
+
+        <div class="footer-link">
+          <p>Copyright &#169 Riyadh Ryan Albar, 2022. All Rights Reserved.</p>
+        </div>
+      </div>
+    </footer>
+    <!-- footer end -->
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+      crossorigin="anonymous"
+    ></script>
+
+    <script>
+      // detect if has scroll event on screen
+      window.addEventListener("scroll", () => {
+        if (window.pageYOffset > 600) {
+          document.querySelector(".navbar").classList.add("navbar-background");
+        } else {
+          document
+            .querySelector(".navbar")
+            .classList.remove("navbar-background");
+        }
+      });
+    </script>
+  </body>
+</html>

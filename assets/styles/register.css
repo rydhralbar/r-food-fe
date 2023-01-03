@@ -1,0 +1,91 @@
+* {
+  overflow: hidden;
+}
+
+html, body {
+  margin: 0;
+}
+
+.bg-login {
+  background-image: url(../images/background-image\(rl\).jpg);
+  background-size: cover;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.bg-overlay {
+  background-color: #EFC81A;
+  ;
+}
+
+.mrtext {
+  color: white;
+  margin-top: 10px;
+  margin-left: 28%;
+}
+
+.stoveimg {
+  height: 120px;
+}
+
+.login-form {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-form h1 {
+  font-family: "Inter";
+  font-size: 21px;
+  display: flex;
+  justify-content: center;  
+  color: #EFC81A;
+  margin-top: 10px;
+}
+
+.login-form .create {
+  font-family: "Inter";
+  font-size: 13px;
+  display: flex;
+  justify-content: center;  
+  color: #8692A6;
+}
+
+.login-form .log-in {
+   line-height: 45px;
+}
+
+.login-form .width-form {
+  width: 100%;
+  margin-bottom: 6px;
+}
+
+.login-form .width-form .form-control {
+  font-size: 13px;
+  line-height: 1;
+}
+
+.login-form .form-check-input:checked {
+  background-color: #EFC81A;
+  border-color: #EFC81A;
+}
+
+.login-form .forgot-pass {
+  text-decoration: none;
+  color: #999999;
+  font-size: 13px;
+  display: block;
+  text-align: right;
+}
+
+.login-form .log-in a {
+  text-decoration: none;
+}
+
+.log-in a {
+  font-family: Airbnb Cereal App;
+  color: #EFC81A;
+}
