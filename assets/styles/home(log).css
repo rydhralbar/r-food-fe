@@ -84,12 +84,11 @@ body {
   z-index: 5;
   width: 43%;
   margin-top: 97px;
-  margin-left: 11%;
 }
 
 #header .background-1 {
   margin-top: -18%;
-  margin-left: 30%;
+  margin-left: 10%;
   width: 421px;
 }
 
@@ -97,7 +96,7 @@ body {
   position: absolute;
   width: 40%;
   margin-top: 5%;
-  margin-left: 15%;
+  margin-left: 4%;
 }
 
 #header .content {

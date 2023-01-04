@@ -4,7 +4,7 @@ body {
 
 /* left side start*/
 .bg-login {
-  background-image: url(../images/background-image\(rl\).jpg);
+  background-image: url(../images/background-image\(rl\).webp);
   background-size: cover;
   height: 100vh;
   display: flex;
