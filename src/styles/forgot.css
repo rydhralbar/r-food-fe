@@ -1,0 +1,52 @@
+html, body {
+  margin: 0;
+}
+
+.bg-login {
+  background-image: url(../images/background-image\(rl\).webp);
+  background-size: cover;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.stoveimg {
+  height: 120px;
+}
+
+
+.mrtext {
+  color: white;
+  margin-top: 10px;
+  margin-left: 28%;
+}
+
+.forgot-form {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.forgot-form h1 {
+  font-family: "Inter";
+  font-size: 25px;
+  display: flex;
+  justify-content: center;  
+  color: #EFC81A;
+  font-weight: 500;
+}
+
+.forgot-form p {
+  font-family: Inter;
+  font-size: 15px;
+  display: flex;
+  justify-content: center;  
+  color: #8692A6;
+  margin-top: 9px;
+}
+
+.forgot-form .width-form-forgot {
+  width: 20rem;
+}
