@@ -1,8 +1,12 @@
 import React from "react";
 import '../styles/detailguest.css';
 import { Link } from "react-router-dom";
+import LongFooter from "../components/organism/Footer/LongFooter";
+
+
 
 function DetailGuest() {
+
   function loginAlert() {
     alert("Login required!")
   }
@@ -60,8 +64,8 @@ function DetailGuest() {
       <section id="recipe" style={{display: "flex", justifyContent: "center"}}>
       <div>
         {/* <!-- title recipe --> */}
-        <h1>Risotto</h1>
-        <img className="title-img" src={require("../images/risotto.webp")} alt="Risotto"/>
+        <h1>Unknown Food</h1>
+        <img className="title-img" src="/images/unknown-food.webp" alt="Food"/>
 
         {/* <!-- ingridients --> */}
         <h2>Ingredients</h2>
@@ -167,16 +171,7 @@ function DetailGuest() {
       </section>
 
       {/* <!-- footer start --> */}
-      <footer id="footer-detail">
-      <div>
-        <h2>Eat, Cook, Repeat</h2>
-        <p>Share Your Best Recipe By Uploading Here !</p>
-
-        <div className="footer-link">
-          <p>Copyright &#169 Riyadh Ryan Albar, 2022. All Rights Reserved.</p>
-        </div>
-      </div>
-      </footer>
+      <LongFooter />
       {/* <!-- footer end --> */}
     </div>
   )

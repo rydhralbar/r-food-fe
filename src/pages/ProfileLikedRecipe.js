@@ -1,6 +1,31 @@
 import React from 'react';
 import "../styles/likedrecipe.css";
 import { Link } from "react-router-dom";
+import ShortFooter from '../components/organism/Footer/ShortFooter';
+import RecipeCardProfile from '../components/molecule/RecipeCardProfile';
+
+const menu = [
+  {
+    name: "Honey Donut",
+    image: "https://superapp.id/blog/wp-content/uploads/2020/10/Aneka-rasa-donat.png",
+    url: "honey-donut",
+  },
+  {
+    name: "Coffee Lava Cake",
+    image: "https://i.pinimg.com/originals/e8/9a/49/e89a4996a8f0049e3f077352cd212343.jpg",
+    url: "coffee-lava-cake",
+  },
+  {
+    name: "Banana Smoothie Pop",
+    image: "https://i.ytimg.com/vi/ypN4EMkm7IM/maxresdefault.jpg",
+    url: "banana-smoothie-pop",
+  },
+  {
+    name: "Sirloin Steak",
+    image: "https://www.wholesomeyum.com/wp-content/uploads/2019/05/wholesomeyum-How-To-Cook-Top-Sirloin-Steak-In-The-Oven-13.jpg",
+    url: "sirloin-steak",
+  }
+]
 
 function ProfileLikedRecipe() {
   React.useEffect(() => {
@@ -49,7 +74,7 @@ function ProfileLikedRecipe() {
     <section>
       <div id="profile-username">
        <img className="profile-photo" src={require("../images/hydra-black-red.webp")} alt="Profile"/>
-       <Link href="./changeprofile.html" style={{textDecoration: "none"}}><img src="/images/edit-logo.webp" alt='Edit' style={{
+       <Link to="../edit-profile" style={{textDecoration: "none"}}><img src="/images/edit-logo.webp" alt='Edit' style={{
         width: "30px",
         marginLeft: "54%",
         marginTop: "-2%"}}/></Link>
@@ -68,56 +93,22 @@ function ProfileLikedRecipe() {
         <img className="photo2" src="./assets/images/bananas-pancake.webp"><p>Bananas Cake</p></img>
       </div> */}
       <div className="row" style={{marginRight: "100px"}}>
-        <div className="col-3">
-          <div className="clickable-image-profile">
-            <img className="myrecipe1"
-              src={require("../images/bomb-chicken2.webp")}
-              alt="Food"
-            />
-            <h2 className="image-title-profile">
-              Bomb Chicken
-            </h2>
-          </div>
-        </div>
-        <div className="col-3">
-          <div className="clickable-image-profile">
-            <img
-              src={require("../images/coffee-lava-cake.webp")}
-              alt="Food"
-            />
-            <h2 className="image-title-profile">
-              Coffee Lava Cake
-            </h2>
-          </div>
-        </div>
-        <div className="col-3">
-          <div className="clickable-image-profile">
-            <img
-              src={require("../images/banana-smoothie-pop.webp")}
-              alt="Food"
-            />
-            <h2 className="image-title-profile">
-              Banana Smoothie Pop
-            </h2>
-          </div>
-        </div>
-        <div className="col-3">
-          <div className="clickable-image-profile">
-            <img
-              src={require("../images/sirloin.webp")}
-              alt='Food'
-            />
-            <h2 className="image-title-profile">
-              Sirloin with potato
-            </h2>
-          </div>
-        </div>
+      {menu.map((item) => (
+              <div className="col-3 col-3">
+                <RecipeCardProfile
+                  image={item?.image}
+                  name={item?.name}
+                  url={item?.name?.toLocaleLowerCase()?.split(" ").join("-")}
+                />
+              </div>
+            ))}
       </div>
   </section>
   </div>
-      <footer className="ftr-profile">
-        <p>Copyright &#169 Riyadh Ryan Albar, 2022. All Rights Reserved</p>
-     </footer>
+      
+      {/* footer start */}
+        <ShortFooter />
+      {/* footer end */}
 
       
     </div>

@@ -13,6 +13,7 @@ import ProfileLikedRecipe from "./pages/ProfileLikedRecipe";
 // import Maintenance from "./pages/Maintenance";
 import CreateNewPassword from "./pages/CreateNewPassword";
 import AddRecipe from "./pages/AddRecipe";
+import EditProfile from "./pages/EditProfile";
 
 function App() {
   // const maintenance = ["/forgot/verification"]
@@ -35,11 +36,11 @@ function App() {
       element: <HomeLogged />
     },
     {
-      path: "/detail",
+      path: "detail/:id",
       element: <DetailGuest />
     },
     {
-      path: "/home/detail",
+      path: "home/detail",
       element: <DetailLogged />
     },
     {
@@ -55,7 +56,7 @@ function App() {
       element: <ProfileLikedRecipe />
     },
     {
-      path: "/add-recipe",
+      path: "add-recipe",
       element: <AddRecipe />
     },
     {
@@ -67,8 +68,12 @@ function App() {
       element: <ForgotVerification />
     },
     {
-      path: "/create-password",
+      path: "create-password",
       element: <CreateNewPassword />
+    },
+    {
+      path: "edit-profile",
+      element: <EditProfile />
     }
   ])
 

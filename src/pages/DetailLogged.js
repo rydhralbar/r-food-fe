@@ -1,9 +1,10 @@
 import React from "react";
 import '../styles/detaillogged.css';
 import { Link } from "react-router-dom";
+import LongFooter from "../components/organism/Footer/LongFooter";
 
 function DetailLogged() {
-  React.useEffect(() => {
+    React.useEffect(() => {
     window.addEventListener("scroll", () => {
       if (window.pageYOffset > 600) {
         return document.querySelector(".navbar").classList.add("navbar-background");
@@ -17,7 +18,7 @@ function DetailLogged() {
 
 
   return (
-    <div>
+    <div id="detail-logged-page">
          {/* <!-- navbar start --> */}
       <nav className="navbar navbar-expand-lg fixed-top">
         <div className="container">
@@ -151,16 +152,7 @@ function DetailLogged() {
     </section>
 
     {/* <!-- footer start --> */}
-    <footer id="footer-detail">
-      <div>
-        <h2>Eat, Cook, Repeat</h2>
-        <p>Share Your Best Recipe By Uploading Here !</p>
-
-        <div className="footer-link">
-          <p>Copyright &#169 Riyadh Ryan Albar, 2022. All Rights Reserved.</p>
-        </div>
-      </div>
-    </footer>
+    <LongFooter />
     {/* <!-- footer end --> */}
 
     </div>

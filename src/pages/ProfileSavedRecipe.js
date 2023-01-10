@@ -1,6 +1,26 @@
 import React from "react";
 import '../styles/savedrecipe.css';
+import ShortFooter from "../components/organism/Footer/ShortFooter";
 import { Link } from "react-router-dom";
+import RecipeCardProfile from "../components/molecule/RecipeCardProfile";
+
+const menu = [
+  {
+    name: "Sugar Salmon",
+    image: "https://iambaker.net/wp-content/uploads/2019/03/bssalmon-blog2.jpg",
+    url: "sugar-salmon",
+  },
+  {
+    name: "Bananas Pancake",
+    image: "https://i.ytimg.com/vi/ypN4EMkm7IM/maxresdefault.jpg",
+    url: "banana-smoothie-pop",
+  },
+  {
+    name: "Indian Salad",
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRuoi8Jg_nXZDsOOjwjB5hkRxNbPdT47dwszw&usqp=CAU",
+    url: "indian-salad",
+  },
+]
 
 function ProfileSavedRecipe() {
   React.useEffect(() => {
@@ -37,7 +57,7 @@ function ProfileSavedRecipe() {
         <div style={{display: "flex", alignItems: "end"}}>
           <img className="online-logo" src={require("../images/online-logo.webp")} alt="Online" />
           <img className="rounded-circle me-3 mt-2" src={require("../images/hydra-black-red.webp")} alt="Profile" style={{width: "45px", zIndex: 0}}/>
-          <a className="log-out" href="/"><p>Log Out</p></a>
+          <Link className="log-out" to="/"><p>Log Out</p></Link>
         </div>
       </div>
     </nav>
@@ -48,7 +68,7 @@ function ProfileSavedRecipe() {
     <section>
       <div id="profile-username">
        <img className="profile-photo" src={require("../images/hydra-black-red.webp")} alt="Profile" />
-       <Link to="./" style={{textDecoration: "none"}}><img src={require("../images/edit-logo.webp")} alt="Edit" style={{
+       <Link to="../edit-profile" style={{textDecoration: "none"}}><img src={require("../images/edit-logo.webp")} alt="Edit" style={{
         width: "30px",
         marginLeft: "54%",
         marginTop: "-2%"}}/></Link>
@@ -67,55 +87,20 @@ function ProfileSavedRecipe() {
         <img className="photo2" src="./assets/images/bananas-pancake.webp"><p>Bananas Cake</p></img>
       </div> --> */}
       <div className="row" style={{marginRight: "100px"}}>
-        <div className="col-3">
-          <div className="clickable-image">
-            <img className="myrecipe1"
-              src={require("../images/sugar-salmon.webp")}
-              alt="Food"
-            />
-            <h2 className="image-title">
-              Sugar Salmon
-            </h2>
-          </div>
-        </div>
-        <div className="col-3">
-          <div className="clickable-image">
-            <img
-              src={require("../images/bananas-pancake.webp")}
-              alt="Food"
-            />
-            <h2 className="image-title">
-              Bananas Pancake
-            </h2>
-          </div>
-        </div>
-        <div className="col-3">
-          <div className="clickable-image">
-            <img
-              src={require("../images/indian-salad.webp")}
-              alt="Food"
-            />
-            <h2 className="image-title">
-              Indian Salad
-            </h2>
-          </div>
-        </div>
-        {/* <!-- <div className="col-3">
-          <div className="clickable-image">
-            <img
-              src={require("../images/sirloin.webp")}
-              alt="Food"
-            />
-            <h2 className="image-title">
-              Sirloin with potato
-            </h2>
-          </div>
-        </div> --> */}
+      {menu.map((item) => (
+              <div className="col-3 col-3">
+                <RecipeCardProfile
+                  image={item?.image}
+                  name={item?.name}
+                  url={item?.name?.toLocaleLowerCase()?.split(" ").join("-")}
+                />
+              </div>
+            ))}
       </div>
      </section>
-      <footer className="ftr-profile">
-        <p>Copyright &#169 Riyadh Ryan Albar, 2022. All Rights Reserved.</p>
-     </footer>
+     {/* footer start */}
+        <ShortFooter />
+      {/* footer end */}
     </div>
   )
 }

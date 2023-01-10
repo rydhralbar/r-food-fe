@@ -1,6 +1,7 @@
 import React from "react";
 import '../styles/addrecipe.css';
 import { Link } from "react-router-dom";
+import LongFooter from "../components/organism/Footer/LongFooter";
 
 const AddRecipe = () => {
   const successAlert = () => {
@@ -25,7 +26,7 @@ const AddRecipe = () => {
 
 
   return (
-    <div>
+    <div id="add-recipe-page">
         <nav className="navbar navbar-add navbar-expand-lg fixed-top">
         <div className="container">
           <div className="collapse navbar-collapse" id="navbarNav" style={{marginTop: "7px"}}>
@@ -34,7 +35,7 @@ const AddRecipe = () => {
                 <Link className="nav-link me-5" aria-current="page" to="/home">Home</Link>
               </li>
               <li className="nav-item me-5">
-                <Link className="nav-link nav-add" to="#">Add Recipe</Link>
+                <Link className="nav-link nav-add active" to="#" style={{  textDecoration: "underline",fontWeight: 500, color: "black"}}>Add Recipe</Link>
               </li>
               <li className="nav-item me-5">
                 <Link className="nav-link" to="/profile">Profile</Link>
@@ -81,17 +82,9 @@ const AddRecipe = () => {
       <button onClick={() => {successAlert(); refreshPage();}} type="button" className="btn btn-warning">Send</button>
     </section>
 
-
-    <footer id="footer-add">
-      <div>
-        <h2>Eat, Cook, Repeat</h2>
-        <p>Share Your Best Recipe By Uploading Here !</p>
-
-        <div className="footer-link">
-          <p>Copyright &#169 Riyadh Ryan Albar, 2022. All Rights Reserved.</p>
-        </div>
-      </div>
-    </footer>
+    {/* footer start */}
+    <LongFooter />
+    {/* footer end */}
     </div>
   )
 }

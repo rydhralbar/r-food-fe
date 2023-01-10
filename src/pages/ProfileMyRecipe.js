@@ -1,6 +1,21 @@
 import React from "react";
 import '../styles/myrecipe.css';
 import { Link } from "react-router-dom";
+import ShortFooter from "../components/organism/Footer/ShortFooter";
+import RecipeCardProfile from "../components/molecule/RecipeCardProfile";
+
+const menu = [
+  {
+    name: "Chicken Kare",
+    image: "https://asset-a.grid.id/crop/0x0:0x0/x/photo/2021/06/24/resep-chicken-curry-rice-menu-s-20210624022011.jpg",
+    url: "chicken-kare",
+  },
+  {
+    name: "Bomb Chicken",
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyPLoYdbQq00C0ObtLqjZYXYulZSWSMn-3Ng&usqp=CAU",
+    url: "bomb-chicken",
+  },
+]
 
 function ProfileMyRecipe() {
   React.useEffect(() => {
@@ -17,7 +32,7 @@ function ProfileMyRecipe() {
 
 
   return (
-    <div>
+    <div id="my-recipe-page">
             {/* <!-- navbar start --> */}
       <nav className="navbar navbar-expand-lg fixed-top">
         <div className="container">
@@ -51,7 +66,7 @@ function ProfileMyRecipe() {
             src={require("../images/hydra-black-red.webp")}
             alt="Profile"
           />
-          <Link href="./changeprofile.html" style={{textDecoration: "none"}}><img src="./images/edit-logo.webp" style={{
+          <Link to="../edit-profile" style={{textDecoration: "none"}}><img src="./images/edit-logo.webp" style={{
             width: "30px",
             marginLeft: "54%",
             marginTop: "-2%"}} alt="Edit" /></Link>
@@ -71,18 +86,15 @@ function ProfileMyRecipe() {
           </ul>
         </div>
         <div className="row" style={{marginRight: "100px"}}>
-          <div className="col-3">
-            <div className="clickable-image-profile">
-              <img className="myrecipe1" src={require("../images/chicken-kare.webp")} alt="Chicken Kare"/>
-              <h2 className="image-title-profile">Chicken Kare</h2>
-            </div>
-          </div>
-          <div className="col-3">
-            <div className="clickable-image-profile">
-              <img src={require("../images/bomb-chicken.webp")} alt="Food"/>
-              <h2 className="image-title">Bomb Chicken</h2>
-            </div>
-          </div>
+        {menu.map((item) => (
+              <div className="col-3 col-3">
+                <RecipeCardProfile
+                  image={item?.image}
+                  name={item?.name}
+                  url={item?.name?.toLocaleLowerCase()?.split(" ").join("-")}
+                />
+              </div>
+            ))}
           {/* <!-- <div className="col-3">
             <div className="clickable-image-profile">
               <img src=require("../images/banana-smoothie-pop.webp")} />
@@ -101,9 +113,7 @@ function ProfileMyRecipe() {
       </section>
 
     {/* <!-- footer start --> */}
-    <footer className="ftr-profile">
-      <p>Copyright &#169 Riyadh Ryan Albar, 2022. All Rights Reserved.</p>
-    </footer>
+    <ShortFooter />
     {/* <!-- footer end --> */}
 
     </div>

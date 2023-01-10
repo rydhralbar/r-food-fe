@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const NavbarGuest = () => {
   function loginAlert() {
@@ -7,7 +8,7 @@ const NavbarGuest = () => {
 
   React.useEffect(() => {
     window.addEventListener("scroll", () => {
-      if (window.pageYOffset > 600) {
+      if (window.pageYOffset > 500) {
         return document.querySelector(".navbar").classList.add("navbar-background");
       } else {
         document
@@ -18,7 +19,6 @@ const NavbarGuest = () => {
   }, []);
 
   return (
-    <div>
       <nav className="navbar navbar-expand-lg fixed-top">
       <div className="container container-xs-fluid">
         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -27,15 +27,15 @@ const NavbarGuest = () => {
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav">
             <li className="nav-item me-5">
-              <Link className="nav-link active" aria-current="page" href="#"   style={{fontWeight: 500, textDecoration: "underline"}}>Home</Link>
+              <Link className="nav-link active" aria-current="page" to="#"   style={{fontWeight: 500, textDecoration: "underline"}}>Home</Link>
             </li>
             <li className="nav-item me-5">
               {/* <Link className="nav-link" onClick={alertLogin}>Add Recipe</Link> */}
-              <Link className="nav-link" onClick={loginAlert}>Add Recipe</Link>
+              <Link className="nav-link" onClick={loginAlert} to="#">Add Recipe</Link>
             </li>
             <li className="nav-item me-5">
               {/* <Link className="nav-link" onClick={alertLogin}>Profile</Link> */}
-              <Link className="nav-link" onClick={loginAlert}>Profile</Link>
+              <Link className="nav-link" onClick={loginAlert} to="#">Profile</Link>
             </li>
           </ul>
         </div>
@@ -53,7 +53,6 @@ const NavbarGuest = () => {
         </div>
       </div>
     </nav>
-    </div>
   )
 }
 
