@@ -16,9 +16,9 @@ const menu = [
     url: "coffee-lava-cake",
   },
   {
-    name: "Banana Smoothie Pop",
-    image: "https://i.ytimg.com/vi/ypN4EMkm7IM/maxresdefault.jpg",
-    url: "banana-smoothie-pop",
+    name: "Bananas Pancake",
+    image: "https://www.cookingclassy.com/wp-content/uploads/2020/04/banana-pancakes-18.jpg",
+    url: "bananas-pancake",
   },
   {
     name: "Sirloin Steak",
