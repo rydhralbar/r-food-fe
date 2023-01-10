@@ -126,20 +126,3 @@ body {
   transition: 0.5s;
 }
 /* profile section end */
-
-/* footer start */
-.ftr-profile p {
-  margin-right: 35px;
-}
-
-.ftr-profile {
-  padding: 20px;
-  color: black;
-  background-color: #EFC81A;
-  text-align: center;
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  z-index: 2;
-}
-/* footer end */
