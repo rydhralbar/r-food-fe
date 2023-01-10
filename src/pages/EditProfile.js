@@ -68,7 +68,7 @@ const EditProfile = () => {
           <ul>
             <li className="myrecipe"><Link to="/profile">My Recipe</Link></li>
             <li className="savedrecipe">
-              <Link to="/saved-recipe"> Saved Recipe </Link>
+              <Link to="/profile/saved-recipe"> Saved Recipe </Link>
             </li>
             <li className="likedrecipe">
               <Link to="/profile/liked-recipe">Liked Recipe</Link>
