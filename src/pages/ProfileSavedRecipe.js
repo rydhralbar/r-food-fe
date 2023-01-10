@@ -11,7 +11,7 @@ const menu = [
     url: "sugar-salmon",
   },
   {
-    name: "Bananas Pancake",
+    name: "Bananas Smoothie Pop",
     image: "https://i.ytimg.com/vi/ypN4EMkm7IM/maxresdefault.jpg",
     url: "banana-smoothie-pop",
   },
