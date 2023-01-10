@@ -32,7 +32,7 @@ const NavbarLogged = () => {
         </div>
         <div style={{display: "flex", alignItems: "end"}}>
           <img className="online-logo" src={require("../../../images/online-logo.webp")} alt="Online"/>
-          <img className="rounded-circle me-3 mt-2" src={require("../../../images/hydra-black-red.webp")} alt="Profile" style={{width: "45px", zIndex: 0}}/>
+          <img className="rounded-circle me-3 mt-2" src={require("../../../images/erik-lehnsherr.webp")} alt="Profile" style={{width: "45px", zIndex: 0}}/>
           <Link className="log-out" to="../"><p>Log Out</p></Link>
         </div>
       </div>

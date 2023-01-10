@@ -38,7 +38,7 @@ const EditProfile = () => {
           </div>
           <div style={{display: "flex", alignItems: "end"}}>
             <img className="online-logo" src="./images/online-logo.webp" alt="Online"/>
-            <img className="rounded-circle me-3 mt-2" alt="Profile" src={require("../images/hydra-black-red.webp")} style={{width: "45px", zIndex: 0}}/>
+            <img className="rounded-circle me-3 mt-2" alt="Profile" src={require("../images/erik-lehnsherr.webp")} style={{width: "45px", zIndex: 0}}/>
             <Link className="log-out" to="/"><p>Log Out</p></Link>
           </div>
         </div>
@@ -50,7 +50,7 @@ const EditProfile = () => {
         <div id="profile-username">
           <img
             className="profile-photo-edit rounded-circle"
-            src={require("../images/hydra-black-red.webp")}
+            src={require("../images/erik-lehnsherr.webp")}
             alt="Profile"
           />
           <Link to="/edit-profile" style={{textDecoration: "none"}}><img src="./images/edit-logo.webp" alt="Edit" style={{

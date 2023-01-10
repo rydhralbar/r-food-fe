@@ -51,7 +51,7 @@ function ProfileMyRecipe() {
           </div>
           <div style={{display: "flex", alignItems: "end"}}>
             <img className="online-logo" src="../images/online-logo.webp" alt="Online"/>
-            <img className="rounded-circle me-3 mt-2" src={require("../images/hydra-black-red.webp")} alt="Profile" style={{width: "45px", zIndex: 0}}/>
+            <img className="rounded-circle me-3 mt-2" src={require("../images/erik-lehnsherr.webp")} alt="Profile" style={{width: "45px", zIndex: 0}}/>
             <Link className="log-out" to="/"><p>Log Out</p></Link>
           </div>
         </div>
@@ -63,7 +63,7 @@ function ProfileMyRecipe() {
         <div id="profile-username">
           <img
             className="profile-photo rounded-circle"
-            src={require("../images/hydra-black-red.webp")}
+            src={require("../images/erik-lehnsherr.webp")}
             alt="Profile"
           />
           <Link to="../edit-profile" style={{textDecoration: "none"}}><img src="./images/edit-logo.webp" style={{
@@ -71,7 +71,7 @@ function ProfileMyRecipe() {
             marginLeft: "54%",
             marginTop: "-2%"}} alt="Edit" /></Link>
 
-          <h1 className="username">Hydra Protector</h1>
+          <h1 className="username">Erik Lehnsherr</h1>
         </div>
 
         <div className="profile-recipe">
