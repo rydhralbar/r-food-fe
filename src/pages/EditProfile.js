@@ -2,6 +2,20 @@ import React from "react";
 import "../styles/changeprofile.css"
 import { Link } from "react-router-dom";
 import ShortFooter from "../components/organism/Footer/ShortFooter";
+import RecipeCardProfile from "../components/molecule/RecipeCardProfile";
+
+const menu = [
+  {
+    name: "Chicken Kare",
+    image: "https://asset-a.grid.id/crop/0x0:0x0/x/photo/2021/06/24/resep-chicken-curry-rice-menu-s-20210624022011.jpg",
+    url: "chicken-kare",
+  },
+  {
+    name: "Bomb Chicken",
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyPLoYdbQq00C0ObtLqjZYXYulZSWSMn-3Ng&usqp=CAU",
+    url: "bomb-chicken",
+  },
+]
 
 const EditProfile = () => {
   return(
@@ -62,18 +76,15 @@ const EditProfile = () => {
           </ul>
         </div>
         <div className="row" style={{marginRight: "100px"}}>
-          <div className="col-3">
-            <div className="clickable-image">
-              <img className="myrecipe1" src={require("../images/chicken-kare.webp")} alt="Food" />
-              <h2 className="image-title">Chicken Kare</h2>
-            </div>
-          </div>
-          <div className="col-3">
-            <div className="clickable-image">
-              <img src={require("../images/bomb-chicken.webp")} alt="Food"/>
-              <h2 className="image-title">Bomb Chicken</h2>
-            </div>
-          </div>
+        {menu.map((item) => (
+              <div className="col-3 col-3">
+                <RecipeCardProfile
+                  image={item?.image}
+                  name={item?.name}
+                  url={item?.name?.toLocaleLowerCase()?.split(" ").join("-")}
+                />
+              </div>
+            ))}
           {/* <!-- <div className="col-3">
             <div className="clickable-image">
               <img src={require("../images/banana-smoothie-pop.webp")} alt="Food" />
