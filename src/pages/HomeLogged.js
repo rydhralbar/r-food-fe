@@ -2,7 +2,7 @@ import React from "react";
 import '../styles/homelogged.css';
 import { Link } from "react-router-dom";
 import LongFooter from "../components/organism/Footer/LongFooter";
-import RecipeCardHome from "../components/molecule/RecipeCardHome";
+import RecipeCardHome from "../components/molecules/RecipeCardHome";
 
 const menu = [
   {

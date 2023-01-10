@@ -2,7 +2,7 @@ import React from "react";
 import '../styles/savedrecipe.css';
 import ShortFooter from "../components/organism/Footer/ShortFooter";
 import { Link } from "react-router-dom";
-import RecipeCardProfile from "../components/molecule/RecipeCardProfile";
+import RecipeCardProfile from "../components/molecules/RecipeCardProfile";
 
 const menu = [
   {
