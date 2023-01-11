@@ -1,7 +1,7 @@
 import React from 'react';
 import "../styles/likedrecipe.css";
 import { Link } from "react-router-dom";
-import ShortFooter from '../components/organism/Footer/ShortFooter';
+import Footer from '../components/organism/Footer/Footer';
 import RecipeCardProfile from '../components/molecules/RecipeCardProfile';
 
 const menu = [
@@ -73,7 +73,7 @@ function ProfileLikedRecipe() {
     
     <section>
       <div id="profile-username">
-       <img className="profile-photo" src={require("../images/erik-lehnsherr.webp")} alt="Profile"/>
+       <img className="profile-photo rounded-circle" src={require("../images/erik-lehnsherr.webp")} alt="Profile"/>
        <Link to="../edit-profile" style={{textDecoration: "none"}}><img src="/images/edit-logo.webp" alt='Edit' style={{
         width: "30px",
         marginLeft: "54%",
@@ -107,7 +107,7 @@ function ProfileLikedRecipe() {
   </div>
       
       {/* footer start */}
-        <ShortFooter />
+        <Footer />
       {/* footer end */}
 
       
