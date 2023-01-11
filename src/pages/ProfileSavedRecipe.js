@@ -1,6 +1,6 @@
 import React from "react";
 import '../styles/savedrecipe.css';
-import Footer from "../components/organism/Footer/Footer";
+import Footer from "../components/organism/Footer";
 import { Link } from "react-router-dom";
 import RecipeCardProfile from "../components/molecules/RecipeCardProfile";
 

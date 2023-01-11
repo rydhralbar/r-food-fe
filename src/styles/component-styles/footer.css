@@ -1,5 +1,5 @@
 /* footer start */
-#long-footer {
+#footer {
   margin-top: 150px;
   background-color: #efc81a;
   display: flex;
@@ -10,7 +10,7 @@
   position: relative;
 }
 
-#long-footer h2 {
+#footer h2 {
   font-style: normal;
   font-weight: 400;
   font-size: 52px;
@@ -19,7 +19,7 @@
   color: #2e266f;
 }
 
-#long-footer p {
+#footer p {
   font-style: normal;
   font-weight: 300;
   font-size: 18px;
@@ -27,7 +27,7 @@
   color: #707070;
 }
 
-#long-footer .footer-link {
+#footer .footer-link {
   position: absolute;
   bottom: 0;
   display: flex;
@@ -38,7 +38,7 @@
   transform: translateX(-50%);
 }
 
-#long-footer .footer-link p {
+#footer .footer-link p {
   font-style: normal;
   font-weight: 400;
   font-size: 13px;

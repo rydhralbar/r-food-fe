@@ -1,7 +1,7 @@
 import React from 'react';
 import "../styles/likedrecipe.css";
 import { Link } from "react-router-dom";
-import Footer from '../components/organism/Footer/Footer';
+import Footer from '../components/organism/Footer';
 import RecipeCardProfile from '../components/molecules/RecipeCardProfile';
 
 const menu = [
