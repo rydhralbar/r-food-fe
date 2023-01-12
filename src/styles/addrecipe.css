@@ -1,8 +1,3 @@
-body {
-  margin: 0;
-  background-color: #fff5ec;
-}
-
 /* navbar start */
 .navbar .log-out {
   text-decoration: none; 
@@ -12,21 +7,6 @@ body {
 .navbar .log-out:hover {
   color: black;
 }
-
-/* nav li {
-  display: inline;
-  list-style-type: none;
-  margin-right: 90px;
-} */
-
-/* nav li a:hover {
-  color: black;
-} */
-
-/* nav li  a {
-  text-decoration: none;
-  color: grey;
-} */
 
 .nav-add {
   text-decoration: underline;

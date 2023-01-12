@@ -1,7 +1,31 @@
 import React from "react";
 import '../styles/detailguest.css';
 import { Link } from "react-router-dom";
-import LongFooter from "../components/organism/Footer/LongFooter";
+import Footer from "../components/organism/Footer";
+import Comment from "../components/molecules/Comment";
+import FoodRecipe from "../components/organism/FoodRecipe";
+import Navbar from "../components/organism/Navbar/NavbarGuest";
+
+const user = [
+  {
+    name: "Garneta Sharina",
+    comment: "This is the best recipe I've ever seen",
+    picture: "https://hips.hearstapps.com/digitalspyuk.cdnds.net/15/06/ustv-the-walking-dead-season-5-michonne.jpg?crop=0.750xw:1.00xh;0.150xw,0&resize=480:*"
+  },
+  {
+    name: "Chef X",
+    comment: "Good",
+    picture: "https://comicvine.gamespot.com/a/uploads/original/11133/111335576/6444011-dsox8zevaaehyo_.jpg"
+  }
+]
+
+const recipe = [
+  {
+    title: "Chicken Kare",
+    photo: "https://kurio-img.kurioapps.com/20/11/03/cc453f8b-71d7-4089-be4b-3fb597920a47.jpg",
+    ingredients: ["- 1 egg", " - 2 egg", " - 3 egg", " - 4 egg"]
+  }
+]
 
 
 
@@ -26,64 +50,18 @@ function DetailGuest() {
 
   return (
     <div>
-            {/* <!-- navbar start --> */}
-      <nav className="navbar navbar-expand-lg fixed-top">
-        <div className="container container-xs-fluid">
-          <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span className="navbar-toggler-icon"></span>
-          </button>
-          <div className="collapse navbar-collapse" id="navbarNav">
-            <ul className="navbar-nav">
-              <li className="nav-item me-5">
-                <Link className="nav-link active" aria-current="page" to="/" style={{fontWeight: 500, textDecoration: "underline"}}>Home</Link>
-              </li>
-              <li className="nav-item me-5">
-                <Link className="nav-link" onClick={loginAlert}>Add Recipe</Link>
-              </li>
-              <li className="nav-item me-5">
-                <Link className="nav-link" onClick={loginAlert}>Profile</Link>
-              </li>
-            </ul>
-          </div>
-          <div className="button-logres col-lg-2 col-xs-5">
-            <Link to="../login">
-              <button type="button" className="btn btn-warning shadow-sm" style={{marginRight: "13px"}}>
-                Log In
-              </button>
-            </Link>
-            <Link to="../signup">  
-              <button type="button" className="btn btn-light shadow-sm">
-                Register
-              </button>
-            </Link>
-          </div>
-        </div>
-      </nav>
+      {/* <!-- navbar start --> */}
+      <Navbar />
       {/* <!-- navbar end --> */}
 
       <section id="recipe" style={{display: "flex", justifyContent: "center"}}>
       <div>
-        {/* <!-- title recipe --> */}
-        <h1>Unknown Food</h1>
-        <img className="title-img" src="/images/unknown-food.webp" alt="Food"/>
-
-        {/* <!-- ingridients --> */}
-        <h2>Ingredients</h2>
-        <p>
-          - 4 C. Low-Sodium Chicken Broth <br />
-          - 3 C. Water <br />
-          - 4 Tbsp Butter, Divided <br />
-          - 1 Small yellow onion, finely chopped <br /> 
-          - 2 Cloves Garlic, Minced <br />
-          - 1 1/2 C. Arborio Rice <br />
-          - Kosher Salt <br />
-          - 1/4 C. Dry White Wine <br />
-          - 1 Tbsp Fresh Lemon Juice <br />
-          - 1 C. Freshly Grated Parmesan Cheese, Plus More For Serving <br />
-          - Freshly Ground Black Pepper <br />
-          - 2 Tbsp Chopped Chives <br />
-          - 2 Tbsp Finely Chopped Basil
-        </p>
+        {recipe.map((item) => (
+          <FoodRecipe 
+          title={item?.title}
+          photo={item?.photo}
+          ingredients={item?.ingredients} />
+        ))}
 
         {/* <!-- Video steps --> */}
         <h2>Video Step</h2>
@@ -142,7 +120,7 @@ function DetailGuest() {
           </Link>
         </div>
 
-        <div className="comment mb-3">
+        <div className="comment" style={{marginBottom: "30px"}}>
           <textarea className="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Comment :"></textarea>
           <Link onClick={loginAlert}><button type="button" className="btn btn-warning">Send</button></Link>
         </div>
@@ -151,27 +129,19 @@ function DetailGuest() {
         <div className="user-comment">
           <h2 className="comment-text">Comment</h2>
           <div>
-            <div className="user">
-              <img className="rounded-circle" src={require("../images/garneta-sharina.webp")} style={{marginTop: "25px"}} alt="Profile"/>
-              <div style={{marginBottom: "27px"}}>
-                <h3>Garneta Sharina</h3>
-                <p>"This is the best recipe I've ever seen"</p>
-              </div>
-            </div>
-
-            <div className="user">
-              <img className="rounded-circle" src={require("../images/prof-x.webp")} alt="Profile"/>
-              <h3>Chef X</h3>
-              <p>"Good"</p>
-            </div>
+            {user.map((item) => (
+              <Comment 
+              name={item?.name}
+              comment={item?.comment}
+              picture={item?.picture} />
+            ))}
           </div>
       </div>
       </div>
-
       </section>
 
       {/* <!-- footer start --> */}
-      <LongFooter />
+      <Footer />
       {/* <!-- footer end --> */}
     </div>
   )

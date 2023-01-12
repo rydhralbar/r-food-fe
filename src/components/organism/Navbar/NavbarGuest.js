@@ -27,7 +27,7 @@ const NavbarGuest = () => {
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav">
             <li className="nav-item me-5">
-              <Link className="nav-link active" aria-current="page" to="#"   style={{fontWeight: 500, textDecoration: "underline"}}>Home</Link>
+              <Link className="nav-link active" aria-current="page" to="#">Home</Link>
             </li>
             <li className="nav-item me-5">
               {/* <Link className="nav-link" onClick={alertLogin}>Add Recipe</Link> */}

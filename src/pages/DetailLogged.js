@@ -1,7 +1,8 @@
 import React from "react";
 import '../styles/detaillogged.css';
 import { Link } from "react-router-dom";
-import LongFooter from "../components/organism/Footer/LongFooter";
+import Footer from "../components/organism/Footer";
+import Navbar from "../components/organism/Navbar/NavbarLogged";
 
 function DetailLogged() {
     React.useEffect(() => {
@@ -20,28 +21,7 @@ function DetailLogged() {
   return (
     <div id="detail-logged-page">
          {/* <!-- navbar start --> */}
-      <nav className="navbar navbar-expand-lg fixed-top">
-        <div className="container">
-          <div className="collapse navbar-collapse" id="navbarNav">
-            <ul className="navbar-nav">
-              <li className="nav-item me-5">
-                <Link className="nav-link me-5 active" aria-current="page" to="../home" style={{fontWeight: 500, textDecoration: "underline"}}>Home</Link>
-              </li>
-              <li className="nav-item me-5">
-                <Link className="nav-link" to="/add-recipe">Add Recipe</Link>
-              </li>
-              <li className="nav-item me-5">
-                <Link className="nav-link" to="../profile">Profile</Link>
-              </li>
-            </ul>
-          </div>
-          <div style={{display: "flex", alignItems: "end"}}>
-            <img className="online-logo" src={require("../images/online-logo.webp")} alt="Online"/>
-            <img className="rounded-circle me-3 mt-2" src={require("../images/erik-lehnsherr.webp")} alt="Profile" style={{width: "45px", zIndex: 0}}/>
-            <Link className="log-out" to="/"><p>Log Out</p></Link>
-          </div>
-        </div>
-      </nav>
+      <Navbar />
     {/* <!-- navbar end --> */}
 
     <section id="recipe" style={{display: "flex", justifyContent: "center"}}>
@@ -50,7 +30,7 @@ function DetailLogged() {
         <h1>Risotto</h1>
         <img className="title-img" src={require("../images/risotto.webp")} alt="Title"/>
 
-        {/* <!-- ingridients --> */}
+        {/* <!-- ingredients --> */}
         <h2>Ingredients</h2>
         <p>
           - 4 C. Low-Sodium Chicken Broth <br />
@@ -152,7 +132,7 @@ function DetailLogged() {
     </section>
 
     {/* <!-- footer start --> */}
-    <LongFooter />
+    <Footer />
     {/* <!-- footer end --> */}
 
     </div>

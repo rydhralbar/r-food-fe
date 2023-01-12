@@ -20,13 +20,13 @@ const NavbarLogged = () => {
         <div className="collapse navbar-collapse" id="navbarNav" style={{marginTop: "7px"}}>
           <ul className="navbar-nav">
             <li className="nav-item me-5">
-              <Link className="nav-link active me-5" aria-current="page" to="#" style={{  fontWeight: 500, textDecoration: "underline"}}>Home</Link>
+              <Link className={`nav-link ${window.location.pathname === "/home" ? "active" : "" }`} aria-current="page" to="/home">Home</Link>
             </li>
             <li className="nav-item me-5">
-              <Link className="nav-link" to="/add-recipe">Add Recipe</Link>
+              <Link className={`nav-link ${window.location.pathname === "/add-recipe" ? "active" : "" }`} to="/add-recipe">Add Recipe</Link>
             </li>
             <li className="nav-item me-5">
-              <Link className="nav-link" to="../profile">Profile</Link>
+              <Link className={`nav-link ${window.location.pathname === "/profile" || window.location.pathname === "/profile/saved-recipe" || window.location.pathname === "/profile/liked-recipe" ? "active" : "" }`} to="/profile">Profile</Link>
             </li>
           </ul>
         </div>

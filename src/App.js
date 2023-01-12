@@ -1,4 +1,5 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import React from "react";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
@@ -16,7 +17,11 @@ import AddRecipe from "./pages/AddRecipe";
 import EditProfile from "./pages/EditProfile";
 
 function App() {
-  // const maintenance = ["/forgot/verification"]
+  // console.log(process.env.REACT_APP_IS_MAINTENANCE)
+  // const maintenance = ["/forgot"]
+  // const [ isPageMaintenance, setIspageMaintenance ] = React.useState(
+  //   process.env.REACT_APP_IS_MAINTENANCE === "true" && maintenance.find((res) => res === document.location.pathname)
+  // )
 
   const router = createBrowserRouter([
     {
@@ -79,6 +84,18 @@ function App() {
 
   // if(true) {
   //   return <Maintenance />;
+  // } else {
+  //   return <RouterProvider router={router} />;
+  // }
+
+  // if(isPageMaintenance){
+  //   return (
+  //     <Maintenance 
+  //       maintenanceList = { maintenance }
+  //       turnOnMaintenance = {() => setIspageMaintenance(true)}
+  //       turnOffMaintenance = {() => setIspageMaintenance(false)}
+  //     />
+  //   )
   // } else {
   //   return <RouterProvider router={router} />;
   // }

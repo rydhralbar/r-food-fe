@@ -1,7 +1,7 @@
 import React from "react";
 import '../styles/addrecipe.css';
-import { Link } from "react-router-dom";
-import LongFooter from "../components/organism/Footer/LongFooter";
+import Footer from "../components/organism/Footer";
+import NavbarLogged from "../components/organism/Navbar/NavbarLogged";
 
 const AddRecipe = () => {
   const successAlert = () => {
@@ -27,28 +27,7 @@ const AddRecipe = () => {
 
   return (
     <div id="add-recipe-page">
-        <nav className="navbar navbar-add navbar-expand-lg fixed-top">
-        <div className="container">
-          <div className="collapse navbar-collapse" id="navbarNav" style={{marginTop: "7px"}}>
-            <ul className="navbar-nav">
-              <li className="nav-item me-5">
-                <Link className="nav-link me-5" aria-current="page" to="/home">Home</Link>
-              </li>
-              <li className="nav-item me-5">
-                <Link className="nav-link nav-add active" to="#" style={{  textDecoration: "underline",fontWeight: 500, color: "black"}}>Add Recipe</Link>
-              </li>
-              <li className="nav-item me-5">
-                <Link className="nav-link" to="/profile">Profile</Link>
-              </li>
-            </ul>
-          </div>
-          <div style={{display: "flex", alignItems: "end"}}>
-             <img className="online-logo" src="/images/online-logo.webp" alt="Online"/>
-            <img className="rounded-circle me-3 mt-2" src={require("../images/erik-lehnsherr.webp")} alt="Profile" style={{width: "45px"}}/>
-            <Link className="log-out" to="/"><p>Log Out</p></Link>
-          </div>
-        </div>
-      </nav>
+        <NavbarLogged />
 
 
     <section id="add-recipe">
@@ -84,7 +63,7 @@ const AddRecipe = () => {
     </section>
 
     {/* footer start */}
-    <LongFooter />
+    <Footer />
     {/* footer end */}
     </div>
   )

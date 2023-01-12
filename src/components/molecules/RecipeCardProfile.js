@@ -12,7 +12,7 @@ const RecipeCardProfile = (props) => {
                 src={image || "./images/unknown-food.webp"}
                 height="80%"
                 width="80%"
-                alt="Chicken Kare"
+                alt="Food"
               />
               <h2 className="image-title" style={{color: "white"}}>
                 {name || "Unknown food"}

@@ -1,7 +1,7 @@
 import React from "react";
 import "../styles/changeprofile.css"
 import { Link } from "react-router-dom";
-import ShortFooter from "../components/organism/Footer/ShortFooter";
+import Footer from "../components/organism/Footer";
 import RecipeCardProfile from "../components/molecules/RecipeCardProfile";
 
 const menu = [
@@ -103,7 +103,7 @@ const EditProfile = () => {
       </section>
 
     {/* <!-- footer start --> */}
-    <ShortFooter />
+    <Footer />
     {/* <!-- footer end --> */}
     </div>
   )

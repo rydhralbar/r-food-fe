@@ -9,25 +9,8 @@ body {
   padding-bottom: 10px;
 }
 
-/* nav li {
-  display: inline;
-  list-style-type: none;
-  margin-right: 90px;
-} */
-
 .nav-link:hover {
   /* font-weight: 500; */
-  color: black;
-}
-
-.nav-link {
-  text-decoration: none;
-  color: grey;
-}
-
-.nav-profile {
-  font-weight: 500;
-  text-decoration: underline;
   color: black;
 }
 
