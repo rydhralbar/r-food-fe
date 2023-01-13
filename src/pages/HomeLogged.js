@@ -3,7 +3,7 @@ import '../styles/homelogged.css';
 import { Link } from "react-router-dom";
 import Footer from "../components/organism/Footer";
 import RecipeCardHome from "../components/molecules/RecipeCardHome";
-import Navbar from "../components/organism/Navbar/NavbarLogged";
+import Navbar from "../components/organism/Navbar/NavbarGuest";
 import Placeholder from "../components/molecules/Placeholder";
 import Pagination from "../components/organism/Pagination";
 
@@ -76,7 +76,7 @@ function HomeLogged() {
 
 
   return (
-    <div id="home-logged-page">
+    <div id="home-logged-page" style={{overflowX: "hidden"}}>
       {/* <!-- navbar start --> */}
     <Navbar />
     {/* <!-- navbar end --> */}

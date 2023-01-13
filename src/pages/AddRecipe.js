@@ -1,7 +1,7 @@
 import React from "react";
 import '../styles/addrecipe.css';
 import Footer from "../components/organism/Footer";
-import NavbarLogged from "../components/organism/Navbar/NavbarLogged";
+import Navbar from "../components/organism/Navbar/NavbarGuest";
 
 const AddRecipe = () => {
   const successAlert = () => {
@@ -27,7 +27,7 @@ const AddRecipe = () => {
 
   return (
     <div id="add-recipe-page">
-        <NavbarLogged />
+        <Navbar />
 
 
     <section id="add-recipe">

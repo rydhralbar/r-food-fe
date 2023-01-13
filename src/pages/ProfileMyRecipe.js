@@ -3,7 +3,7 @@ import '../styles/myrecipe.css';
 import { Link } from "react-router-dom";
 import Footer from "../components/organism/Footer";
 import RecipeCard from "../components/molecules/RecipeCardProfile";
-import NavbarLogged from "../components/organism/Navbar/NavbarLogged";
+import Navbar from "../components/organism/Navbar/NavbarGuest";
 
 const menu = [
   {
@@ -19,6 +19,8 @@ const menu = [
 ]
 
 function ProfileMyRecipe() {
+  const [ profile, setProfile ] = React.useState(localStorage.getItem("profile") ? JSON.parse(localStorage.getItem("profile")) : null);
+
   React.useEffect(() => {
     window.addEventListener("scroll", () => {
       if (window.pageYOffset > 5) {
@@ -33,8 +35,8 @@ function ProfileMyRecipe() {
 
   return (
     <div id="my-recipe-page">
-            {/* <!-- navbar start --> */}
-      <NavbarLogged />
+      {/* <!-- navbar start --> */}
+      <Navbar/>
       {/* <!-- navbar end --> */}
 
       {/* <!-- profile photo & username start --> */}
@@ -42,7 +44,7 @@ function ProfileMyRecipe() {
         <div id="profile-username">
           <img
             className="profile-photo rounded-circle"
-            src={require("../images/erik-lehnsherr.webp")}
+            src={`${profile.photo}`}
             alt="Profile"
           />
           <Link to="../edit-profile" style={{textDecoration: "none"}}><img src="./images/edit-logo.webp" style={{
@@ -50,7 +52,7 @@ function ProfileMyRecipe() {
             marginLeft: "54%",
             marginTop: "-2%"}} alt="Edit" /></Link>
 
-          <h1 className="username">Erik Lehnsherr</h1>
+          <h1 className="username">{profile.name}</h1>
         </div>
 
         <div className="profile-recipe">

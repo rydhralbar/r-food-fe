@@ -77,7 +77,7 @@ function Home() {
   }, []);
 
   return (
-    <div>
+    <div style={{overflowX: "hidden"}}>
       {/* navbar start */}
       <Navbar />
       {/* <!-- navbar end --> */}

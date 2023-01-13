@@ -2,7 +2,7 @@ import React from "react";
 import '../styles/detaillogged.css';
 import { Link } from "react-router-dom";
 import Footer from "../components/organism/Footer";
-import Navbar from "../components/organism/Navbar/NavbarLogged";
+import Navbar from "../components/organism/Navbar/NavbarGuest";
 
 function DetailLogged() {
     React.useEffect(() => {
@@ -20,7 +20,8 @@ function DetailLogged() {
 
   return (
     <div id="detail-logged-page">
-         {/* <!-- navbar start --> */}
+      
+    {/* <!-- navbar start --> */}
       <Navbar />
     {/* <!-- navbar end --> */}
 

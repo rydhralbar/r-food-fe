@@ -2,6 +2,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import React from "react";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
+import Logout from "./pages/Logout";
 import Register from "./pages/Register";
 import HomeLogged from "./pages/HomeLogged";
 import DetailLogged from "./pages/DetailLogged";
@@ -31,6 +32,10 @@ function App() {
     {
       path: "login",
       element: <Login />,
+    },
+    {
+      path: "logout",
+      element: <Logout />,
     },
     {
       path: "signup",

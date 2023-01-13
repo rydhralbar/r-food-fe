@@ -3,7 +3,7 @@ import "../styles/likedrecipe.css";
 import { Link } from "react-router-dom";
 import Footer from '../components/organism/Footer';
 import RecipeCardProfile from '../components/molecules/RecipeCardProfile';
-import Navbar from '../components/organism/Navbar/NavbarLogged';
+import Navbar from '../components/organism/Navbar/NavbarGuest';
 
 const menu = [
   {
@@ -29,6 +29,8 @@ const menu = [
 ]
 
 function ProfileLikedRecipe() {
+  const [ profile, setProfile ] = React.useState(localStorage.getItem("profile") ? JSON.parse(localStorage.getItem("profile")) : null);
+
   React.useEffect(() => {
     window.addEventListener("scroll", () => {
       if (window.pageYOffset > 5) {
@@ -52,12 +54,12 @@ function ProfileLikedRecipe() {
     {/* <!-- profile photo & username -->  */}
     <section>
       <div id="profile-username">
-       <img className="profile-photo rounded-circle" src={require("../images/erik-lehnsherr.webp")} alt="Profile"/>
+       <img className="profile-photo rounded-circle" src={`${profile.photo}`} alt="Profile"/>
        <Link to="../edit-profile" style={{textDecoration: "none"}}><img src="/images/edit-logo.webp" alt='Edit' style={{
         width: "30px",
         marginLeft: "54%",
         marginTop: "-2%"}}/></Link>
-       <h1 className="username">Erik Lehnsherr</h1>
+       <h1 className="username">{profile.name}</h1>
      </div>
      
      <div className="profile-recipe">
