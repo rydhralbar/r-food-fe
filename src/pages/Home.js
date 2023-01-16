@@ -4,60 +4,50 @@ import { Link } from "react-router-dom";
 import Footer from "../components/organism/Footer";
 import RecipeCardHome from "../components/molecules/RecipeCardHome";
 import Placeholder from "../components/molecules/Placeholder";
-import Navbar from "../components/organism/Navbar/NavbarGuest";
+import Navbar from "../components/organism/Navbar";
+import axios from "axios";
 
-function Home() {
+const Home = () => {
   let [keyword, setKeyword] = React.useState(
     "Discovery Recipe & Delicious Food"
   );
   let [menu, setMenu] = React.useState([]);
   let [isLoading, setIsLoading] = React.useState(true);
+  let [currentPage, setCurrentPage] = React.useState(1);
+  let [totalPage, setTotalPage] = React.useState(1);
 
   let emptyArray = [1, 2, 3, 4, 5, 6];
 
   // Did mount
   React.useEffect(() => {
-    setTimeout(() => {
-      setIsLoading(false);
-      setMenu([
-        {
-          name: "Chicken Kare",
-          image:
-            "https://asset-a.grid.id/crop/0x0:0x0/x/photo/2021/06/24/resep-chicken-curry-rice-menu-s-20210624022011.jpg",
-          url: "chicken-kare",
-        },
-        {
-          name: "Bomb Chicken",
-          image:
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyPLoYdbQq00C0ObtLqjZYXYulZSWSMn-3Ng&usqp=CAU",
-          url: "bomb-chicken",
-        },
-        {
-          name: "Coffee Lava Cake",
-          image:
-            "https://i.pinimg.com/originals/e8/9a/49/e89a4996a8f0049e3f077352cd212343.jpg",
-          url: "coffee-lava-cake",
-        },
-        {
-          name: "Sugar Salmon",
-          image:
-            "https://iambaker.net/wp-content/uploads/2019/03/bssalmon-blog2.jpg",
-          url: "sugar-salmon",
-        },
-        {
-          name: "Banana Smoothie Pop",
-          image: "https://i.ytimg.com/vi/ypN4EMkm7IM/maxresdefault.jpg",
-          url: "banana-smoothie-pop",
-        },
-        {
-          name: "Indian Salad",
-          image:
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRuoi8Jg_nXZDsOOjwjB5hkRxNbPdT47dwszw&usqp=CAU",
-          url: "indian-salad",
-        },
-      ]);
-    }, 4000);
+    axios
+      .get(`${process.env.REACT_APP_URL_BACKEND}/recipes?page=1&limit=6`)
+      .then(({ data }) => {
+        console.log(data);
+        setMenu(data?.data);
+        let countPagination = Math.ceil(parseInt(data?.all_pagination?.[0]?.count) / 6);
+        setTotalPage(countPagination);
+      })
+      .catch(() => setMenu([]))
+      .finally(() => setIsLoading(false));
   }, []);
+
+  const fetchPagination = (pageParam) => {
+    setIsLoading(true);
+    setMenu([]);
+    axios
+      .get(
+        `${process.env.REACT_APP_URL_BACKEND}/recipes?page=${pageParam}&limit=6`
+      )
+      .then(({ data }) => {
+        let countPagination = Math.ceil(parseInt(data?.all_pagination?.[0]?.count) / 6);
+        setMenu(data?.data);
+        setTotalPage(countPagination);
+        setCurrentPage(pageParam);
+      })
+      .catch(() => setMenu([]))
+      .finally(() => setIsLoading(false));
+  };
 
   // Did update
   React.useEffect(() => {
@@ -77,7 +67,7 @@ function Home() {
   }, []);
 
   return (
-    <div style={{overflowX: "hidden"}}>
+    <div style={{ overflowX: "hidden" }}>
       {/* navbar start */}
       <Navbar />
       {/* <!-- navbar end --> */}
@@ -165,7 +155,7 @@ function Home() {
                 Try autumnal pumpkin and butternut squash, or the winning
                 standby combination of chorizo & pea risotto.
               </p>
-              <Link to="./detail">
+              <Link to="/detail">
                 <button type="button" className="btn btn-warning">
                   See More
                 </button>
@@ -192,19 +182,13 @@ function Home() {
                     <Placeholder />
                   </div>
                 ))
-              : menu.map((item) => (
+              : menu.map((item, key) => (
                   <div
                     className="col-lg-4 col-6"
                     style={{ transitionDuration: "1s" }}
+                    key={key}
                   >
-                    <RecipeCardHome
-                      image={item?.image}
-                      name={item?.name}
-                      url={item?.name
-                        ?.toLocaleLowerCase()
-                        ?.split(" ")
-                        .join("-")}
-                    />
+                    <RecipeCardHome item={item} />
                   </div>
                 ))}
             {menu.length === 0 && !isLoading ? (
@@ -230,26 +214,46 @@ function Home() {
         }}
       >
         <ul className="pagination">
-          <li className="page-item previous">
-            <span className="page-link">Previous</span>
-          </li>
-          <li className="page-item active">
-            <span className="page-link">1</span>
-          </li>
-          <li className="page-item" aria-current="page">
-            <Link className="page-link" to="/">
-              2
-            </Link>
-          </li>
           <li className="page-item">
-            <Link className="page-link" to="/">
-              3
-            </Link>
+            <a
+              className={`page-link ${currentPage === 1 ? "disabled" : ""}`}
+              onClick={() => {
+                if (currentPage > 1) fetchPagination(currentPage - 1);
+              }}
+            >
+              Previous
+            </a>
           </li>
+          {/* {console.log({
+            array1: totalPage,
+            array2: 
+          })} */}
+          {[...new Array(totalPage)].map((item, key) => {
+            let position = ++key;
+            return (
+              <li className="page-item" key={key}>
+                <a
+                  className={`page-link ${
+                    currentPage === position ? "active" : ""
+                  }`}
+                  onClick={() => {
+                    fetchPagination(position);
+                  }}
+                >
+                  {position}
+                </a>
+              </li>
+            );
+          })}
           <li className="page-item">
-            <Link className="page-link" to="/">
+            <a
+              className={`page-link ${currentPage === totalPage ? "disabled" : ""}`}
+              onClick={() => {
+                if (currentPage < totalPage) fetchPagination(currentPage + 1);
+              }}
+            >
               Next
-            </Link>
+            </a>
           </li>
         </ul>
       </nav>

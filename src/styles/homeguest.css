@@ -180,6 +180,9 @@ body {
   cursor: pointer;
   border-radius: 10px;
   object-fit: cover;
+  box-shadow: -7px 8px 14px 3px rgba(0,0,0,0.75);
+  -webkit-box-shadow: -7px 8px 14px 3px rgba(0,0,0,0.75);
+  -moz-box-shadow: -7px 8px 14px 3px rgba(0,0,0,0.75);
 }
 
 #popular-recipe .clickable-image-home:hover {

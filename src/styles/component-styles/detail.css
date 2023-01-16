@@ -1,0 +1,36 @@
+#detail-page .title-img {
+  object-fit: cover;
+  object-position: center;
+}
+
+#detail-page .mark-recipe {
+  right: 0;
+  bottom: 0; 
+  position: absolute; 
+  margin-right: 5px;
+  margin-bottom: 15px;
+}
+
+#detail-page .mark-recipe .like-logo {
+  width: 43px;
+  background-color: white;
+  border-radius: 5px;
+  padding: 7px;
+}
+
+#detail-page .mark-recipe .favorite-logo {
+  width: 38px;
+  margin-right: 70px;
+  margin-left: 16px;
+  background-color: #EFC81A;
+  padding: 8px;
+  border-radius: 3px;
+}
+
+#detail-page .mark-recipe .like-logo:hover {
+  background-color: grey;
+}
+
+#detail-page .mark-recipe .favorite-logo:hover {
+  background-color: grey;
+}

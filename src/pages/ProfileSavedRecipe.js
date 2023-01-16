@@ -3,7 +3,7 @@ import '../styles/savedrecipe.css';
 import Footer from "../components/organism/Footer";
 import { Link } from "react-router-dom";
 import RecipeCard from "../components/molecules/RecipeCardProfile";
-import Navbar from "../components/organism/Navbar/NavbarGuest";
+import Navbar from "../components/organism/Navbar";
 
 const menu = [
   {

@@ -20,18 +20,18 @@ const CreateNewPassword = () => {
       <div>
         {/* <!-- for new password --> */}
         <div className="mb-3 width-form-forgot">
-          <label for="email-input" className="form-label">New password</label>
+          <label htmlFor="email-input" className="form-label">New password</label>
           <input type="email" className="form-control" id="email-input" placeholder="Enter new password"/>
         </div>
         {/* <!-- for new password --> */}
         <div className="mb-3 width-form-forgot">
-          <label for="password-input" className="form-label">Confirm New password</label>
+          <label htmlFor="password-input" className="form-label">Confirm New password</label>
           <input type="password" className="form-control" id="password-input" placeholder="Confirm new password"/>
         </div>
         {/* <!-- check button --> */}
         <div className="mb-3 form-check">
           <input type="checkbox" className="form-check-input" id="agreement" value="" />
-          <label className="form-check-label" for="flexCheckDefault">I agree with the new password</label>
+          <label className="form-check-label" htmlFor="flexCheckDefault">I agree with the new password</label>
         </div>
         {/* <!-- confirm button --> */}
         <div className="d-grid">

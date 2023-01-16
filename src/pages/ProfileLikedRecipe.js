@@ -3,7 +3,7 @@ import "../styles/likedrecipe.css";
 import { Link } from "react-router-dom";
 import Footer from '../components/organism/Footer';
 import RecipeCardProfile from '../components/molecules/RecipeCardProfile';
-import Navbar from '../components/organism/Navbar/NavbarGuest';
+import Navbar from '../components/organism/Navbar';
 
 const menu = [
   {

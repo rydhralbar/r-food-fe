@@ -16,8 +16,8 @@ const Logout = () => {
   return (
     <div >
       <div style={{display: "flex", justifyContent: "center", marginTop: "40vh"}}>
-        <div class="spinner-border" role="status">
-          <span class="visually-hidden">Loading...</span>
+        <div className="spinner-border" role="status">
+          <span className="visually-hidden">Loading...</span>
         </div>
       </div>
       <h1 style={{display: "flex", justifyContent: "center"}}>Please wait...</h1>

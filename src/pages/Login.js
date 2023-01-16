@@ -11,6 +11,11 @@ function Login() {
   const [errMsg, setErrMsg] = React.useState("");
   const [isLoading, setIsLoading] = React.useState(false);
 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log(email);
+  }
+
   React.useEffect(() => {
     axios
       .get(`${process.env.REACT_APP_URL_BACKEND}`)
@@ -20,7 +25,7 @@ function Login() {
     const token = localStorage.getItem("token")
 
     if(isLogin && token){
-      navigate("/home")
+      navigate("/")
     }
   },[]);
 
@@ -42,13 +47,13 @@ function Login() {
             <h1>Welcome</h1>
             <p>Log in into your exiting account</p>
 
-            {isError ? (<div class="alert alert-danger" role="alert">
+            {isError ? (<div className="alert alert-danger" role="alert">
               { errMsg }
             </div>) : null}  
 
             {/* <!-- for email --> */}
             <div className="mb-3 width-form-login">
-              <label for="email-input" className="form-label">
+              <label htmlFor="email-input" className="form-label">
                 E-mail
               </label>
               <input
@@ -61,7 +66,7 @@ function Login() {
             </div>
             {/* <!-- for password --> */}
             <div className="mb-3 width-form-login">
-              <label for="password-input" className="form-label">
+              <label htmlFor="password-input" className="form-label">
                 Password
               </label>
               <input
@@ -80,7 +85,7 @@ function Login() {
                 id="agreement"
                 value=""
               />
-              <label className="form-check-label" for="flexCheckDefault">
+              <label className="form-check-label" htmlFor="flexCheckDefault">
                 I agree to terms & conditions
               </label>
             </div>
@@ -102,7 +107,7 @@ function Login() {
                     localStorage.setItem("isLogin", "true");
                     localStorage.setItem("token", res?.data?.data?.token ?? "")
                     localStorage.setItem("profile", JSON.stringify(res?.data?.data?.profile) ?? "")
-                    navigate("/home")
+                    navigate("/")
                   })
                   .catch((err) => {
                     setIsError(true);

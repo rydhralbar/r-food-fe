@@ -16,7 +16,7 @@ function ForgotVerification() {
           <div>
         {/* <!-- for code --> */}
         <div className="mb-3 width-form-forgot">
-          <label for="email-input" className="form-label">Code 6 Digit</label>
+          <label htmlFor="email-input" className="form-label">Code 6 Digit</label>
           <input type="tel" className="form-control" id="email-input" placeholder="Enter code" maxlength="6"/>
         </div>
         {/* <!-- login button --> */}

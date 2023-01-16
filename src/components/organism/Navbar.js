@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const NavbarGuest = () => {
+const Navbar = () => {
   const [isLogin, setIsLogin] = React.useState(localStorage.getItem("isLogin"));
   const [profile, setProfile] = React.useState(
     localStorage.getItem("profile")
@@ -47,10 +47,10 @@ const NavbarGuest = () => {
                   <li className="nav-item me-5">
                     <Link
                       className={`nav-link ${
-                        window.location.pathname === "/home" ? "active" : ""
+                        window.location.pathname === "/" ? "active" : ""
                       }`}
                       aria-current="page"
-                      to="/home"
+                      to="/"
                     >
                       Home
                     </Link>
@@ -109,7 +109,7 @@ const NavbarGuest = () => {
             </ul>
           </div>
           {isLogin ? (<div style={{display: "flex", alignItems: "end"}}>
-            <img className="online-logo" src={require("../../../images/online-logo.webp")} alt="Online"/>
+            <img className="online-logo" src="/images/online-logo.webp" alt="Online"/>
             <img className="rounded-circle me-3 mt-2" src={`${profile.photo}`} alt="Profile" style={{width: "45px", zIndex: 0}}/>
             <Link className="log-out" to="/logout"><p>Log Out</p></Link>
           </div>) : (<div className="button-logres col-lg-2 col-xs-5">
@@ -134,4 +134,4 @@ const NavbarGuest = () => {
   );
 };
 
-export default NavbarGuest;
+export default Navbar;

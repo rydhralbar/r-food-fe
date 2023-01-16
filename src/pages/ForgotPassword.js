@@ -19,7 +19,7 @@ function ForgotPassword() {
             <p>to send your password resend</p>
             {/* <!-- for email --> */}
             <div className="mb-3 width-form-forgot">
-              <label for="email-input" className="form-label">E-mail</label>
+              <label htmlFor="email-input" className="form-label">E-mail</label>
               <input type="email" className="form-control" id="email-input" placeholder="E-mail"/>
             </div>
             {/* <!-- login button --> */}

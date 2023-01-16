@@ -1,10 +1,11 @@
 import React from "react";
 import '../styles/detailguest.css';
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import Footer from "../components/organism/Footer";
 import Comment from "../components/molecules/Comment";
 import FoodRecipe from "../components/organism/FoodRecipe";
-import Navbar from "../components/organism/Navbar/NavbarGuest";
+import Navbar from "../components/organism/Navbar";
+import axios from "axios";
 
 const user = [
   {
@@ -19,23 +20,28 @@ const user = [
   }
 ]
 
-const recipe = [
-  {
-    title: "Chicken Kare",
-    photo: "https://kurio-img.kurioapps.com/20/11/03/cc453f8b-71d7-4089-be4b-3fb597920a47.jpg",
-    ingredients: ["- 1 egg", " - 2 egg", " - 3 egg", " - 4 egg"]
-  }
-]
-
 
 
 function DetailGuest() {
+  let [menu, setMenu] = React.useState([]);
+  let [isLoading, setIsLoading] = React.useState(true);
+  const { state } = useLocation()
 
   function loginAlert() {
     alert("Login required!")
   }
 
   React.useEffect(() => {
+    console.log({state})
+    axios.get(`${process.env.REACT_APP_URL_BACKEND}/recipes?sort=title_asc`).then(({data}) => {
+      console.log(data?.data)
+      setMenu(data?.data)
+
+      const isLogin = localStorage.getItem("isLogin");
+      const token = localStorage.getItem("token")
+    })
+    .catch(() => setMenu([])).finally(() => setIsLoading(false))
+
     window.addEventListener("scroll", () => {
       if (window.pageYOffset > 600) {
         return document.querySelector(".navbar").classList.add("navbar-background");
@@ -56,12 +62,11 @@ function DetailGuest() {
 
       <section id="recipe" style={{display: "flex", justifyContent: "center"}}>
       <div>
-        {recipe.map((item) => (
           <FoodRecipe 
-          title={item?.title}
-          photo={item?.photo}
-          ingredients={item?.ingredients} />
-        ))}
+          title={state?.data?.title}
+          photo={state?.data?.photo}
+          ingredients={state?.data?.ingredients}
+          />
 
         {/* <!-- Video steps --> */}
         <h2>Video Step</h2>

@@ -1,7 +1,7 @@
 import React from "react";
 import '../styles/addrecipe.css';
 import Footer from "../components/organism/Footer";
-import Navbar from "../components/organism/Navbar/NavbarGuest";
+import Navbar from "../components/organism/Navbar";
 
 const AddRecipe = () => {
   const successAlert = () => {
@@ -32,19 +32,19 @@ const AddRecipe = () => {
 
     <section id="add-recipe">
       <div className="mb-4">
-        <label for="formFileLg" className="form-label" style={{fontWeight: 500}}>Food Photo</label>
+        <label htmlFor="formFileLg" className="form-label" style={{fontWeight: 500}}>Food Photo</label>
         <input accept="image/*" className="form-control form-control-lg" id="formFileLg" type="file"/>
       </div>
       <div className="mb-4">
-        <label for="exampleFormControlInput1" className="form-label" style={{fontWeight: 500}}>Title</label>
+        <label htmlFor="exampleFormControlInput1" className="form-label" style={{fontWeight: 500}}>Title</label>
         <input type="text" className="form-control" id="exampleFormControlInput1" placeholder="Enter your food title"/>
       </div>
       <div className="mb-4">
-        <label for="exampleFormControlTextarea1" className="form-label" style={{fontWeight: 500}}>Ingredients</label>
+        <label htmlFor="exampleFormControlTextarea1" className="form-label" style={{fontWeight: 500}}>Ingredients</label>
         <textarea className="form-control" id="exampleFormControlTextarea1" rows="9" placeholder="Enter your food ingredients"></textarea>
       </div>
       <div className="mb-4">
-        <label for="formFileLg" className="form-label" style={{fontWeight: 500}}>Video Step</label>
+        <label htmlFor="formFileLg" className="form-label" style={{fontWeight: 500}}>Video Step</label>
         <input accept="video/*" className="form-control form-control-lg" id="formFileLg" type="file"/>
       </div>
       <div className="mb-3">
