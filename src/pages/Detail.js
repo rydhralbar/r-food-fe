@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import '../styles/detailguest.css';
+import '../styles/detail.css';
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import Footer from "../components/organism/Footer";
 import Comment from "../components/molecules/Comment";

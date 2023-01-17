@@ -19,6 +19,8 @@ const menu = [
 ]
 
 const EditProfile = () => {
+  const [ profile, setProfile ] = React.useState(localStorage.getItem("profile") ? JSON.parse(localStorage.getItem("profile")) : null);
+
   return(
     <div>
       {/* <!-- navbar start --> */}
@@ -30,10 +32,10 @@ const EditProfile = () => {
         <div id="profile-username">
           <img
             className="profile-photo-edit rounded-circle"
-            src={require("../images/erik-lehnsherr.webp")}
+            src={profile?.photo}
             alt="Profile"
           />
-          <Link to="/edit-profile" style={{textDecoration: "none"}}><img src="./images/edit-logo.webp" alt="Edit" style={{
+          <Link to="/edit-profile" style={{textDecoration: "none"}}><img src={"./images/edit-logo.webp"} alt="Edit" style={{
             width: "30px",
             marginLeft: "54%",
             marginTop: "-2%"}}/></Link>
