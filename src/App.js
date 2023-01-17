@@ -1,13 +1,12 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import React from "react";
+import { React } from "react";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Logout from "./pages/Logout";
 import Register from "./pages/Register";
-import DetailLogged from "./pages/DetailLogged";
 import ProfileMyRecipe from "./pages/ProfileMyRecipe";
 import ProfileSavedRecipe from "./pages/ProfileSavedRecipe";
-import DetailGuest from "./pages/DetailGuest";
+import Detail from "./pages/Detail";
 import ForgotPassword from "./pages/ForgotPassword";
 import ForgotVerification from "./pages/ForgotVerification";
 import ProfileLikedRecipe from "./pages/ProfileLikedRecipe";
@@ -15,6 +14,10 @@ import ProfileLikedRecipe from "./pages/ProfileLikedRecipe";
 import CreateNewPassword from "./pages/CreateNewPassword";
 import AddRecipe from "./pages/AddRecipe";
 import EditProfile from "./pages/EditProfile";
+
+// import redux
+import store from "./store/index";
+import { Provider } from "react-redux";
 
 function App() {
   // console.log(process.env.REACT_APP_IS_MAINTENANCE)
@@ -42,11 +45,7 @@ function App() {
     },
     {
       path: "detail/:id",
-      element: <DetailGuest />
-    },
-    {
-      path: "home/detail",
-      element: <DetailLogged />
+      element: <Detail />
     },
     {
       path: "profile",
@@ -100,7 +99,12 @@ function App() {
   //   return <RouterProvider router={router} />;
   // }
 
-  return <RouterProvider router={router} />;
+  return (
+    <Provider store={store}>
+      <RouterProvider router={router} /> 
+    </Provider>
+  
+  );
 }
 
 export default App;

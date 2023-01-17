@@ -1,5 +1,5 @@
 import React from "react";
-import "../styles/homeguest.css";
+import "../styles/home.css";
 import { Link } from "react-router-dom";
 import Footer from "../components/organism/Footer";
 import RecipeCardHome from "../components/molecules/RecipeCardHome";
@@ -188,7 +188,8 @@ const Home = () => {
                     style={{ transitionDuration: "1s" }}
                     key={key}
                   >
-                    <RecipeCardHome item={item} />
+                    {/* <RecipeCardHome item={item} /> */}
+                    <RecipeCardHome image={item?.photo} name={item?.title} url={item?.slug} />
                   </div>
                 ))}
             {menu.length === 0 && !isLoading ? (
