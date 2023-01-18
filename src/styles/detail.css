@@ -88,7 +88,7 @@
   background-color: #FFA500;
 }
 
-#recipe .comment .btn {
+#recipe .comment-column .btn {
   display: block;
   justify-content: center;
   margin: auto;
@@ -100,11 +100,11 @@
   color: white;
 }
 
-#recipe .comment .btn:hover {
+#recipe .comment-column .btn:hover {
   background-color: #FFA500;
 }
 
-#recipe .comment {
+#recipe .comment-column {
   margin-left: -45px;
 }
 
@@ -125,10 +125,6 @@
   margin-top: 3px;
 }
 
-#recipe .comment a {
-  text-decoration: none;
-}
-
 
 /* recipe end */
 
@@ -143,6 +139,40 @@
     color: #fff5ec !important;
   }
 
+  #recipe h1 {
+    font-size: 35px;
+  }
+
+  #detail-page .mark-recipe {
+    margin-right: 18%;
+    margin-bottom: 7px;
+  }
+
+  #detail-page .mark-recipe .like-logo {
+    width: 30px;
+  }
+
+  #detail-page .mark-recipe .favorite-logo {
+    margin-right: unset;
+    margin-left: 8px;
+    width: 27px;
+  }
+
+  #detail-page h2 {
+    margin-left: 45px;
+    font-size: 30px;
+  }
+
+  #recipe .video-text {
+    margin-left: 45px;
+    font-size: 30px;
+  }
+
+  #recipe .videostep {
+    margin-left: -12%;
+    margin-top: 5%;
+  }
+
   #recipe .comment {
     margin-left: -18%;
   }
@@ -152,12 +182,21 @@
   }
 
   #recipe .user-comment .comment-text {
-    margin-left: 7%;
-    margin-top: 22%;
+    margin-left: 45px;
+  }
+
+  #recipe .comment-column {
+    margin-left: -25%;
+  }
+
+  #recipe .comment-column .btn {
+    width: 63%;
+    margin-left: 28%;
+    display: flex;
   }
 
   #recipe .form-control {
-    width: 60%;
+    width: 62%;
     height: 225px;
   }
 

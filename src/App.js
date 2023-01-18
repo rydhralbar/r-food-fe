@@ -19,7 +19,7 @@ import EditProfile from "./pages/EditProfile";
 import store from "./store/index";
 import { Provider } from "react-redux";
 
-function App() {
+const App = () => {
   // console.log(process.env.REACT_APP_IS_MAINTENANCE)
   // const maintenance = ["/forgot"]
   // const [ isPageMaintenance, setIspageMaintenance ] = React.useState(

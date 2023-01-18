@@ -63,7 +63,7 @@ const RecipeCardHome = (props) => {
         width="80%"
         alt="Placeholder"
       />
-      <h2 className="image-title-home">
+      <h2 className="image-title-home" style={{color: "white"}}>
         {name || "Unknown Food"}
       </h2>
     </div>

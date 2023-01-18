@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-function Register() {
+const Register = () => {
   const navigate = useNavigate();
   const [name, setName] = React.useState("");
   const [email, setEmail] = React.useState("");
@@ -19,16 +19,12 @@ function Register() {
     axios
       .get(`${process.env.REACT_APP_URL_BACKEND}`)
       .then((res) => console.log(res));
-
-    const isLogin = localStorage.getItem("isLogin");
-    const token = localStorage.getItem("token");
-
   }, []);
 
   return (
-    <div style={{ overflow: "hidden" }}>
+    <div id="register">
       <div className="row">
-        <div className="col-6 bg-login">
+        <div className="col-6 bg-register">
           <div>
             <img
               className="stoveimg"
@@ -38,8 +34,8 @@ function Register() {
             <p className="mrtext">R Food</p>
           </div>
         </div>
-        <div className="col-6 login-form">
-          <div height="89%">
+        <div className="col-6 register-form">
+          <div className="reg-form" height="89%">
             <h1>Let's Get Started !</h1>
             <p className="create">Create new account to access all features</p>
 
@@ -122,6 +118,7 @@ function Register() {
                 disabled={isLoading}
                 onClick={() => {
                   setIsLoading(true)
+    
                   axios.post(`${process.env.REACT_APP_URL_BACKEND}/users`, 
                   {
                     name,
@@ -134,6 +131,7 @@ function Register() {
                   })
                   .catch((err) => {
                     setIsError(true);
+                    console.log({err: err.response})
                     setErrMsg(err?.response?.data?.message ?? "System error, please try again later.")
                   })
                   .finally(() => setIsLoading(false))

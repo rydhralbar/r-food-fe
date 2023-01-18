@@ -9,7 +9,7 @@ const Comment = (props) => {
         <img className="rounded-circle" src={ picture } alt="Profile"/>
           <div>
             <h3>{ name }</h3>
-            <p>{ comment }</p>
+            <p>"{ comment }"</p>
           </div>
       </div>
     </div>

@@ -23,7 +23,7 @@ const user = [
 
 
 
-function Detail() {
+const Detail = () => {
   const [modal, setModal] = useState(false);
   const [videoLoading, setVideoLoading] = useState(true);
 
@@ -42,7 +42,7 @@ function Detail() {
   // let [isLoading, setIsLoading] = React.useState(true);
   // const { state } = useLocation()
 
-  function loginAlert() {
+  const loginAlert = () => {
     alert("Login required!")
   }
 
@@ -85,49 +85,8 @@ function Detail() {
           />
 
         {/* <!-- Video steps --> */}
-        <h2>Video Step</h2>
+        <h2 className="video-text">Video Step</h2>
         <div className="videostep">
-          <button onClick={openModal} className="video_btn">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-play-fill" viewBox="0 0 16 16">
-              <path d="m11.596 8.697-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z"></path>
-            </svg>
-            {modal ? (
-            <section className="modal__bg">
-              <div className="modal__align">
-                <div className="modal__content" modal={modal}>
-                  {/* <IoCloseOutline
-                    className="modal__close"
-                    arial-label="Close modal"
-                    onClick={setModal}
-                  /> */}
-                  <div className="modal__video-align">
-                    {videoLoading ? (
-                      <div className="modal__spinner">
-                        {/* <BiLoaderAlt
-                          className="modal__spinner-style"
-                          fadeIn="none"
-                        /> */}
-                      </div>
-                  ) : null}
-                  <iframe
-                    className="modal__video-style"
-                    onLoad={spinner}
-                    loading="lazy"
-                    width="800"
-                    height="500"
-                    src="https://www.youtube.com/embed/NKtR3KpS83w"
-                    title="YouTube video player"
-                    frameBorder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowfullscreen
-                  ></iframe>
-                </div>
-              </div>
-            </div>
-          </section>
-        ) : null}
-          </button>
-
           <button onClick={openModal} className="video_btn">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-play-fill" viewBox="0 0 16 16">
               <path d="m11.596 8.697-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z"></path>
@@ -211,7 +170,7 @@ function Detail() {
           </button>
         </div>
 
-        <div className="comment" style={{marginBottom: "30px"}}>
+        <div className="comment-column" style={{marginBottom: "30px"}}>
           <textarea className="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Comment :"></textarea>
           <Link onClick={loginAlert}><button type="button" className="btn btn-warning">Send</button></Link>
         </div>

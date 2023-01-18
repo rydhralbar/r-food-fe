@@ -286,8 +286,30 @@ body {
 
   #header .overlay-background {
     width: 50%;
-    margin-right: -8%;
   }
+
+  #header .main-background-guest {
+    position: absolute;
+    z-index: 5;
+    width: 70%;
+    margin-top: 55%;
+    margin-left: 10%;
+}
+
+  #header .background-1-guest {
+    margin-top: 34%;
+    margin-left: 16%;
+    width: 65%;
+    position: absolute;
+    z-index: 1;
+}
+
+  #header .background-2-guest {
+    position: absolute;
+    width: 66%;
+    margin-top: 62%;
+    margin-left: 15%;
+}
 
   #header .background-grid .main-background {
     width: 250px;
@@ -314,24 +336,35 @@ body {
   }
 
   #header .container .discover {
-    margin-top: -13rem;
+    margin-top: -80%;
     z-index: 1;
   }
 
   #header .container .discover h1 {
-    font-size: 40px;
+    font-size: 37px;
+    text-align: center;
+  }
+
+  #header .search-recipe {
+    display: flex;
+    justify-content: center;
+  }
+
+  #header .search-recipe .form-control {
+    width: 90%;
   }
   /* header end */
 
   /* new recipe start */
   #new-recipe .background-overlay {
-    height: 375px;
-    width: 200px;
+    height: 30%;
+    width: 40%;
   }
 
   #new-recipe .main-image {
-    width: 90%;
-    height: 355px;
+    width: 80%;
+    height: 235px;
+    margin-top: -9px;
     margin-left: 12px;
     object-fit: cover;
     border-radius: 10px;
@@ -343,13 +376,13 @@ body {
   }
 
   #new-recipe .title {
-    font-size: 35px;
+    font-size: 30px;
   }
   /* new recipe end */
 
   /* popular recipe start */
   #popular-recipe .title {
-    font-size: 35px;
+    font-size: 30px;
   }
 
   #popular-recipe .grid-wrapper {
@@ -370,20 +403,13 @@ body {
     font-size: 22px;
   }
 
+  .pagination-mobile {
+    margin-top: 10%;
+    margin-bottom: -10%;
+  }
+
   .pagin-style {
     margin-top: 2rem;
-  }
-
-  #footer-home-guest {
-    width: 108%
-  }
-
-  #footer-home-guest h2 {
-    font-size: 35px;
-  }
-
-  #footer-home-guest p {
-    font-size: 14px;
   }
 }
 /* responsive for mobile end */

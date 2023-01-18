@@ -9,7 +9,7 @@ const Navbar = () => {
       : null
   );
 
-  function loginAlert() {
+  const loginAlert = () => {
     alert("Login required!");
   }
 
@@ -88,19 +88,19 @@ const Navbar = () => {
                     <Link
                       className="nav-link active"
                       aria-current="page"
-                      to="#"
+                      to="/"
                     >
                       Home
                     </Link>
                   </li>
                   <li className="nav-item me-5">
                     {/* <Link className="nav-link" onClick={alertLogin}>Add Recipe</Link> */}
-                    <Link className="nav-link" onClick={loginAlert} to="#">
+                    <Link className="nav-link" onClick={loginAlert} to="/">
                       Add Recipe
                     </Link>
                   </li>
                   <li className="nav-item me-5">
-                    <Link className="nav-link" onClick={loginAlert} to="#">
+                    <Link className="nav-link" onClick={loginAlert} to="/">
                       Profile
                     </Link>
                   </li>

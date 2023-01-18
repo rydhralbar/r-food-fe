@@ -1,6 +1,6 @@
 import React from "react";
 import "../styles/home.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Footer from "../components/organism/Footer";
 import RecipeCardHome from "../components/molecules/RecipeCardHome";
 import Placeholder from "../components/molecules/Placeholder";
@@ -8,6 +8,7 @@ import Navbar from "../components/organism/Navbar";
 import axios from "axios";
 
 const Home = () => {
+  const navigate = useNavigate()
   let [keyword, setKeyword] = React.useState(
     "Discovery Recipe & Delicious Food"
   );
@@ -49,6 +50,15 @@ const Home = () => {
       .finally(() => setIsLoading(false));
   };
 
+  const fetchByKeyWord = () => {
+    setIsLoading(true);
+    setMenu([]);
+    axios
+      .get(
+        `${process.env.REACT_APP_URL_BACKEND}/recipes/search/name`
+      )
+  }
+
   // Did update
   React.useEffect(() => {
     console.log("Loading berubah");
@@ -82,8 +92,8 @@ const Home = () => {
           <div className="row align-items-center">
             {/* <!-- side left --> */}
             <div className="discover col-lg-5 col-xs-12">
-              <h1>{keyword}</h1>
-              <div className="mt-4">
+              <h1>Discovery Recipe & Delicious Food</h1>
+              <div className="mt-4 search-recipe">
                 <input
                   type="text"
                   className="form-control form-control-lg"
@@ -91,6 +101,12 @@ const Home = () => {
                   placeholder="Search Recipe..."
                   onChange={(event) => {
                     setKeyword(event.target.value);
+                  }}
+                  onKeyDown={(e) => {
+                    if(e.key === "Enter"){
+                      window.location.href = "/#popular-recipe"
+
+                    }
                   }}
                 />
               </div>
@@ -207,6 +223,7 @@ const Home = () => {
 
       {/* <!-- pagination start --> */}
       <nav
+        className="pagination-mobile"
         aria-label="..."
         style={{
           display: "flex",

@@ -2,7 +2,7 @@ import React from "react";
 import "../styles/forgot.css";
 import { Link } from "react-router-dom";
 
-function ForgotPassword() {
+const ForgotPassword = () => {
   return (
     <div style={{overflow: "hidden"}}>
      <div className="row">

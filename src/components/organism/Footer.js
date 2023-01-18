@@ -9,7 +9,7 @@ const LongFooter = () => {
         <p>Share Your Best Recipe By Uploading Here !</p>
 
         <div className="footer-link">
-          <p>Copyright &#169 2022 by Riyadh Ryan Albar. All Rights Reserved.</p>
+          <p>Copyright &copy; 2022 by Riyadh Ryan Albar. All Rights Reserved.</p>
         </div>
       </div>
     </footer>

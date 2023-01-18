@@ -28,7 +28,7 @@ const menu = [
   }
 ]
 
-function ProfileLikedRecipe() {
+const ProfileLikedRecipe = () => {
   const [ profile, setProfile ] = React.useState(localStorage.getItem("profile") ? JSON.parse(localStorage.getItem("profile")) : null);
 
   React.useEffect(() => {

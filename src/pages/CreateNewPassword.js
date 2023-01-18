@@ -3,7 +3,7 @@ import "../styles/forgot.css";
 import { Link } from "react-router-dom";
 
 const CreateNewPassword = () => {
-  function successAlert() {
+  const successAlert = () => {
     alert("New password created successfully")
   }
 

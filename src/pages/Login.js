@@ -3,7 +3,7 @@ import "../styles/login.css";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
-function Login() {
+const Login = () => {
   const navigate = useNavigate();
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
@@ -30,9 +30,9 @@ function Login() {
   },[]);
 
   return (
-    <div style={{ overflow: "hidden" }}>
+    <div id="login">
       <div className="row">
-        <div className="col-6 bg-login">
+        <div className="col-lg-6 bg-login">
           <div>
             <img
               className="stoveimg"
@@ -42,7 +42,7 @@ function Login() {
             <p className="mrtext">R Food</p>
           </div>
         </div>
-        <div className="col-6 login-form">
+        <div className="col-lg-6 col-xs-12 login-form">
           <div>
             <h1>Welcome</h1>
             <p>Log in into your exiting account</p>
