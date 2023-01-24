@@ -8,7 +8,7 @@ import Navbar from "../components/organism/Navbar";
 import axios from "axios";
 
 const Home = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   let [keyword, setKeyword] = React.useState(
     "Discovery Recipe & Delicious Food"
   );
@@ -16,6 +16,7 @@ const Home = () => {
   let [isLoading, setIsLoading] = React.useState(true);
   let [currentPage, setCurrentPage] = React.useState(1);
   let [totalPage, setTotalPage] = React.useState(1);
+  let [disablePagination, setDisablePagination] = React.useState(false);
 
   let emptyArray = [1, 2, 3, 4, 5, 6];
 
@@ -26,7 +27,9 @@ const Home = () => {
       .then(({ data }) => {
         console.log(data);
         setMenu(data?.data);
-        let countPagination = Math.ceil(parseInt(data?.all_pagination?.[0]?.count) / 6);
+        let countPagination = Math.ceil(
+          parseInt(data?.all_pagination?.[0]?.count) / 6
+        );
         setTotalPage(countPagination);
       })
       .catch(() => setMenu([]))
@@ -41,10 +44,13 @@ const Home = () => {
         `${process.env.REACT_APP_URL_BACKEND}/recipes?page=${pageParam}&limit=6`
       )
       .then(({ data }) => {
-        let countPagination = Math.ceil(parseInt(data?.all_pagination?.[0]?.count) / 6);
+        let countPagination = Math.ceil(
+          parseInt(data?.all_pagination?.[0]?.count) / 6
+        );
         setMenu(data?.data);
         setTotalPage(countPagination);
         setCurrentPage(pageParam);
+        setDisablePagination(false);
       })
       .catch(() => setMenu([]))
       .finally(() => setIsLoading(false));
@@ -52,12 +58,72 @@ const Home = () => {
 
   const fetchByKeyWord = () => {
     setIsLoading(true);
+
+    if (keyword && keyword !== "") {
+      axios
+        .get(`${process.env.REACT_APP_URL_BACKEND}/recipe-search/${keyword}?sort=asc`)
+        .then(({ data }) => {
+          setMenu(data?.data);
+          setDisablePagination(true);
+        })
+        .catch(() => setMenu([]))
+        .finally(() => setIsLoading(false));
+    } else {
+      axios
+        .get(`${process.env.REACT_APP_URL_BACKEND}/recipes?page=1&limit=6`)
+        .then(({ data }) => {
+          setMenu(data?.data);
+          let countPagination = Math.ceil(
+            parseInt(data?.all_pagination?.[0]?.count) / 6
+          );
+          setTotalPage(countPagination);
+        })
+        .catch(() => setMenu([]))
+        .finally(() => setIsLoading(false));
+    }
+  };
+
+  const fetchBySort = (sortValue) => {
+    setIsLoading(true);
     setMenu([]);
-    axios
-      .get(
-        `${process.env.REACT_APP_URL_BACKEND}/recipes/search/name`
-      )
-  }
+    if(sortValue === "1"){
+      axios
+        .get(`${process.env.REACT_APP_URL_BACKEND}/recipes?sort=created_at_desc`)
+        .then(({ data }) => {
+          setMenu(data?.data);
+          setDisablePagination(true);
+        })
+        .catch(() => setMenu([]))
+        .finally(() => setIsLoading(false));
+    } else if (sortValue === "2") {
+      axios
+      .get(`${process.env.REACT_APP_URL_BACKEND}/recipes?sort=created_at_asc`)
+      .then(({ data }) => {
+        setMenu(data?.data);
+        setDisablePagination(true);
+      })
+      .catch(() => setMenu([]))
+      .finally(() => setIsLoading(false));
+    } else if (sortValue === "3") {
+      axios
+      .get(`${process.env.REACT_APP_URL_BACKEND}/recipes?sort=title_asc`)
+      .then(({ data }) => {
+        setMenu(data?.data);
+        setDisablePagination(true);
+      })
+      .catch(() => setMenu([]))
+      .finally(() => setIsLoading(false));
+    } else if (sortValue === "4") {
+      axios
+      .get(`${process.env.REACT_APP_URL_BACKEND}/recipes?sort=title_desc`)
+      .then(({ data }) => {
+        setMenu(data?.data);
+        setDisablePagination(true);
+      })
+      .catch(() => setMenu([]))
+      .finally(() => setIsLoading(false));
+    }
+  };
 
   // Did update
   React.useEffect(() => {
@@ -103,9 +169,9 @@ const Home = () => {
                     setKeyword(event.target.value);
                   }}
                   onKeyDown={(e) => {
-                    if(e.key === "Enter"){
-                      window.location.href = "/#popular-recipe"
-
+                    if (e.key === "Enter") {
+                      window.location.href = "/#popular-recipe";
+                      fetchByKeyWord();
                     }
                   }}
                 />
@@ -188,7 +254,30 @@ const Home = () => {
         <div className="container">
           {/* <!-- title --> */}
           <div className="container">
-            <h2 className="title">Popular Recipe</h2>
+            <div className="row align-self-center">
+              <div className="col">
+                <h2 className="title">Popular Recipe</h2>
+              </div>
+              <div className="col-2">
+                <select
+                  className="form-select"
+                  aria-label="Default select example"
+                  style={{ marginLeft: "-35%", marginTop: "11%" }}
+                  onChange={(e) => {
+                    fetchBySort(e.target.value)
+                    console.log(e.target.value)
+                  }}
+                >
+                  <option selected disabled>
+                    Sort by
+                  </option>
+                  <option value="1">Newest update</option>
+                  <option value="2">Oldest update</option>
+                  <option value="3">A-Z</option>
+                  <option value="4">Z-A</option>
+                </select>
+              </div>
+            </div>
           </div>
 
           <div className="row">
@@ -205,7 +294,11 @@ const Home = () => {
                     key={key}
                   >
                     {/* <RecipeCardHome item={item} /> */}
-                    <RecipeCardHome image={item?.photo} name={item?.title} url={item?.slug} />
+                    <RecipeCardHome
+                      image={item?.photo}
+                      name={item?.title}
+                      url={item?.slug}
+                    />
                   </div>
                 ))}
             {menu.length === 0 && !isLoading ? (
@@ -222,59 +315,63 @@ const Home = () => {
       {/* <!-- popular recipe end --> */}
 
       {/* <!-- pagination start --> */}
-      <nav
-        className="pagination-mobile"
-        aria-label="..."
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          marginBottom: "2rem",
-        }}
-      >
-        <ul className="pagination">
-          <li className="page-item">
-            <a
-              className={`page-link ${currentPage === 1 ? "disabled" : ""}`}
-              onClick={() => {
-                if (currentPage > 1) fetchPagination(currentPage - 1);
-              }}
-            >
-              Previous
-            </a>
-          </li>
-          {/* {console.log({
+      {!isLoading && !disablePagination && (
+        <nav
+          className="pagination-mobile"
+          aria-label="..."
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            marginBottom: "2rem",
+          }}
+        >
+          <ul className="pagination">
+            <li className="page-item">
+              <a
+                className={`page-link ${currentPage === 1 ? "disabled" : ""}`}
+                onClick={() => {
+                  if (currentPage > 1) fetchPagination(currentPage - 1);
+                }}
+              >
+                Previous
+              </a>
+            </li>
+            {/* {console.log({
             array1: totalPage,
             array2: 
           })} */}
-          {[...new Array(totalPage)].map((item, key) => {
-            let position = ++key;
-            return (
-              <li className="page-item" key={key}>
-                <a
-                  className={`page-link ${
-                    currentPage === position ? "active" : ""
-                  }`}
-                  onClick={() => {
-                    fetchPagination(position);
-                  }}
-                >
-                  {position}
-                </a>
-              </li>
-            );
-          })}
-          <li className="page-item">
-            <a
-              className={`page-link ${currentPage === totalPage ? "disabled" : ""}`}
-              onClick={() => {
-                if (currentPage < totalPage) fetchPagination(currentPage + 1);
-              }}
-            >
-              Next
-            </a>
-          </li>
-        </ul>
-      </nav>
+            {[...new Array(totalPage)].map((item, key) => {
+              let position = ++key;
+              return (
+                <li className="page-item" key={key}>
+                  <a
+                    className={`page-link ${
+                      currentPage === position ? "active" : ""
+                    }`}
+                    onClick={() => {
+                      fetchPagination(position);
+                    }}
+                  >
+                    {position}
+                  </a>
+                </li>
+              );
+            })}
+            <li className="page-item">
+              <a
+                className={`page-link ${
+                  currentPage === totalPage ? "disabled" : ""
+                }`}
+                onClick={() => {
+                  if (currentPage < totalPage) fetchPagination(currentPage + 1);
+                }}
+              >
+                Next
+              </a>
+            </li>
+          </ul>
+        </nav>
+      )}
       {/* <!-- pagination end --> */}
 
       {/* <!-- footer start --> */}
@@ -282,6 +379,6 @@ const Home = () => {
       {/* <!-- footer end --> */}
     </div>
   );
-}
+};
 
 export default Home;
