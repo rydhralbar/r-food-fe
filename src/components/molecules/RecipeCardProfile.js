@@ -18,7 +18,6 @@ const RecipeCardProfile = (props) => {
           axios
             .get(`${process.env.REACT_APP_URL_BACKEND}/recipes/${id}`)
             .then(({ data }) => {
-              console.log("bisa");
               dispatch(recipeReducer.setData(data?.data?.[0]));
               dispatch(recipeReducer.setId(id));
               navigate(`/detail/${id}`);

@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const Pagination = () => {
   return (
     <div>
-       <nav
+      <nav
         aria-label="..."
         style={{
           display: "flex",
@@ -37,7 +37,7 @@ const Pagination = () => {
         </ul>
       </nav>
     </div>
-  )
-}
+  );
+};
 
 export default Pagination;

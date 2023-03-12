@@ -8,12 +8,16 @@ import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
 import axios from "axios";
 import * as profileReducer from "../store/reducer/profile";
+import Pagination from "../components/organism/Pagination";
 
 const ProfileMyRecipe = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [userRecipes, setUserRecipes] = useState([]);
   const [editPhoto, setEditPhoto] = useState();
   const [editName, setEditName] = useState();
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPage, setTotalPage] = useState(1);
+  const [seeMore, setSeeMore] = useState(false);
 
   const dispatch = useDispatch();
   const data = useSelector((state) => state.profile);
@@ -47,6 +51,34 @@ const ProfileMyRecipe = () => {
       }
     });
   }, []);
+
+  const fetchPagination = (positionPage) => {
+    setIsLoading(true);
+
+    axios
+      .get(
+        `${
+          process.env.REACT_APP_URL_BACKEND
+        }/recipes?sort=created_at&typeSort=desc&page=${currentPage}&limit=${
+          userRecipes.length === 8 && 8
+        }`
+      )
+      .then(({ data }) => {
+        setIsLoading(false);
+        setUserRecipes(data?.data);
+        setTotalPage(Math.ceil(data?.total_all_data / data?.limit));
+        setCurrentPage(positionPage);
+      })
+      .catch((error) => {
+        setIsLoading(false);
+        Swal.fire({
+          icon: "error",
+          title: "There was an error from server !",
+          showCancelButton: false,
+          showCloseButton: false,
+        });
+      });
+  };
 
   const handleEdit = () => {
     setIsLoading(true);
@@ -254,7 +286,7 @@ const ProfileMyRecipe = () => {
         </div>
         <div className="row" style={{ marginRight: "100px" }}>
           {userRecipes ? (
-            userRecipes.map((item) => (
+            userRecipes.slice(0, 8)?.map((item) => (
               <div className="col-3 col-3" style={{ marginBottom: "28px" }}>
                 <RecipeCard
                   image={item?.photo}
@@ -269,6 +301,28 @@ const ProfileMyRecipe = () => {
             </h4>
           )}
         </div>
+        {userRecipes.length > 8 && (
+          <div
+            className={`d-flex justify-content-center ${seeMore && "d-none"}`}
+          >
+            <button
+              className="btn btn-secondary"
+              onClick={() => setSeeMore(true)}
+            >
+              See more
+            </button>
+          </div>
+        )}
+        {seeMore &&
+          userRecipes.slice(8).map((item) => (
+            <div className="col-3 col-3" style={{ marginBottom: "28px" }}>
+              <RecipeCard
+                image={item?.photo}
+                name={item?.title}
+                id={item?.id}
+              />
+            </div>
+          ))}
       </section>
       {/* <!-- profile photo & username end --> */}
 

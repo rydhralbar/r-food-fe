@@ -21,12 +21,10 @@ const Home = () => {
   const [sort, setSort] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPage, setTotalPage] = useState(1);
-  const [disablePagination, setDisablePagination] = useState(false);
   const [sortBy, setSortBy] = useState(["created_at", "desc"]);
+  const [disablePagination, setDisablePagination] = useState(false);
 
   let emptyArray = [1, 2, 3, 4, 5, 6];
-
-  console.log(keyword);
 
   const fetchByKeyWord = () => {
     setSortBy(["created_at", "desc"]);
@@ -49,7 +47,6 @@ const Home = () => {
 
   useEffect(() => {
     setIsLoading(true);
-    setDisablePagination(true);
 
     const fetchNewRecipe = axios.get(
       `${process.env.REACT_APP_URL_BACKEND}/recipes?sort=created_at&typeSort=desc`
@@ -70,8 +67,6 @@ const Home = () => {
         );
       })
       .catch((err) => {
-        console.log("error pas promise");
-        console.log(err);
         setIsLoading(false);
         Swal.fire({
           icon: "error",
@@ -81,7 +76,6 @@ const Home = () => {
         });
       })
       .finally(() => {
-        setDisablePagination(false);
         setIsLoading(false);
         window.addEventListener("scroll", () => {
           if (window.pageYOffset > 600) {
@@ -406,6 +400,8 @@ const Home = () => {
             display: "flex",
             justifyContent: "center",
             marginBottom: "2rem",
+
+            marginTop: "2.5rem",
           }}
         >
           <ul className="pagination">

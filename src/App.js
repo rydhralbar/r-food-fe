@@ -21,7 +21,6 @@ import { persistStore } from "redux-persist";
 
 const App = () => {
   let persistor = persistStore(store);
-  // console.log(process.env.REACT_APP_IS_MAINTENANCE)
   // const maintenance = ["/forgot"]
   // const [ isPageMaintenance, setIspageMaintenance ] = useState(
   //   process.env.REACT_APP_IS_MAINTENANCE === "true" && maintenance.find((res) => res === document.location.pathname)

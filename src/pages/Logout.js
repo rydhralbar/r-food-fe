@@ -22,6 +22,7 @@ const Logout = () => {
     setTimeout(() => {
       dispatch(profileReducer.setProfile(null));
       dispatch(profileReducer.setToken(null));
+      dispatch(profileReducer.setIsLogin(null));
       navigate("/");
     }, 1500);
   }, []);

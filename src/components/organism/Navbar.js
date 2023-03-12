@@ -67,6 +67,9 @@ const Navbar = () => {
                           : ""
                       }`}
                       to="/add-recipe"
+                      onClick={() => {
+                        window.scrollTo(0, 0);
+                      }}
                     >
                       Add Recipe
                     </Link>
