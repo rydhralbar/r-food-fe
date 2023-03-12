@@ -8,15 +8,12 @@ import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
 import axios from "axios";
 import * as profileReducer from "../store/reducer/profile";
-import Pagination from "../components/organism/Pagination";
 
 const ProfileMyRecipe = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [userRecipes, setUserRecipes] = useState([]);
   const [editPhoto, setEditPhoto] = useState();
   const [editName, setEditName] = useState();
-  const [currentPage, setCurrentPage] = useState(1);
-  const [totalPage, setTotalPage] = useState(1);
   const [seeMore, setSeeMore] = useState(false);
 
   const dispatch = useDispatch();
@@ -51,34 +48,6 @@ const ProfileMyRecipe = () => {
       }
     });
   }, []);
-
-  const fetchPagination = (positionPage) => {
-    setIsLoading(true);
-
-    axios
-      .get(
-        `${
-          process.env.REACT_APP_URL_BACKEND
-        }/recipes?sort=created_at&typeSort=desc&page=${currentPage}&limit=${
-          userRecipes.length === 8 && 8
-        }`
-      )
-      .then(({ data }) => {
-        setIsLoading(false);
-        setUserRecipes(data?.data);
-        setTotalPage(Math.ceil(data?.total_all_data / data?.limit));
-        setCurrentPage(positionPage);
-      })
-      .catch((error) => {
-        setIsLoading(false);
-        Swal.fire({
-          icon: "error",
-          title: "There was an error from server !",
-          showCancelButton: false,
-          showCloseButton: false,
-        });
-      });
-  };
 
   const handleEdit = () => {
     setIsLoading(true);
@@ -134,6 +103,7 @@ const ProfileMyRecipe = () => {
 
   const refreshPage = () => {
     window.location.reload();
+    window.scrollTo(0, 0);
   };
 
   const maintenance = () => {

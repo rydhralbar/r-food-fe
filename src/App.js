@@ -4,12 +4,10 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Logout from "./pages/Logout";
 import Register from "./pages/Register";
-import ProfileMyRecipe from "./pages/ProfileMyRecipe";
-import ProfileSavedRecipe from "./pages/ProfileSavedRecipe";
+import Profile from "./pages/Profile";
 import Detail from "./pages/Detail";
 import ForgotPassword from "./pages/ForgotPassword";
 import ForgotVerification from "./pages/ForgotVerification";
-import ProfileLikedRecipe from "./pages/ProfileLikedRecipe";
 // import Maintenance from "./pages/Maintenance";
 import CreateNewPassword from "./pages/CreateNewPassword";
 import AddRecipe from "./pages/AddRecipe";
@@ -49,15 +47,7 @@ const App = () => {
     },
     {
       path: "profile",
-      element: <ProfileMyRecipe />,
-    },
-    {
-      path: "profile/saved-recipe",
-      element: <ProfileSavedRecipe />,
-    },
-    {
-      path: "profile/liked-recipe",
-      element: <ProfileLikedRecipe />,
+      element: <Profile />,
     },
     {
       path: "add-recipe",
