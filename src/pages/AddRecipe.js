@@ -42,6 +42,7 @@ const AddRecipe = () => {
           title: `${res.data.message}`,
         });
         refreshPage();
+        window.scrollTo(0, 0);
       })
       .catch((err) => {
         if (err.response.status === 401) {
