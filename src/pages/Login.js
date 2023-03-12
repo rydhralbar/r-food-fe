@@ -31,6 +31,7 @@ const Login = () => {
         .then((res) => {
           dispatch(profileReducer.setProfile(res?.data?.data?.profile));
           dispatch(profileReducer.setToken(res?.data?.data?.token));
+          dispatch(profileReducer.setIsLogin(true));
 
           setIsError(false);
           setIsSuccess(true);

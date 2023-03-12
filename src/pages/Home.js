@@ -49,6 +49,7 @@ const Home = () => {
 
   useEffect(() => {
     setIsLoading(true);
+    setDisablePagination(true);
 
     const fetchNewRecipe = axios.get(
       `${process.env.REACT_APP_URL_BACKEND}/recipes?sort=created_at&typeSort=desc`
@@ -80,6 +81,7 @@ const Home = () => {
         });
       })
       .finally(() => {
+        setDisablePagination(false);
         setIsLoading(false);
         window.addEventListener("scroll", () => {
           if (window.pageYOffset > 600) {

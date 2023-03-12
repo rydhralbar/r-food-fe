@@ -41,7 +41,7 @@ const AddRecipe = () => {
           icon: "success",
           title: `${res.data.message}`,
         });
-        navigate("/");
+        refreshPage();
       })
       .catch((err) => {
         if (err.response.status === 401) {
@@ -57,6 +57,10 @@ const AddRecipe = () => {
       .finally(() => {
         setIsLoading(false);
       });
+  };
+
+  const refreshPage = () => {
+    window.location.reload();
   };
 
   useEffect(() => {

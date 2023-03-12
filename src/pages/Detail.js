@@ -152,10 +152,9 @@ const Detail = () => {
               onClick={() => {
                 if (profile?.profile?.payload) {
                   maintenance();
-                } else {
-                  loginAlert();
                 }
               }}
+              disabled={!profile?.profile?.payload}
             >
               Send
             </button>
