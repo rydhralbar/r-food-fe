@@ -1,33 +1,84 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "../styles/login.css";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import Swal from "sweetalert2";
+import { useDispatch, useSelector } from "react-redux";
+import * as profileReducer from "../store/reducer/profile";
 
 const Login = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [isError, setIsError] = useState(false);
+  const [errMsg, setErrMsg] = useState("");
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [successMsg, setSuccessMsg] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [isCheckedBox, setIsCheckedBox] = useState(false);
+
+  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [email, setEmail] = React.useState("");
-  const [password, setPassword] = React.useState("");
-  const [isError, setIsError] = React.useState(false);
-  const [errMsg, setErrMsg] = React.useState("");
-  const [isLoading, setIsLoading] = React.useState(false);
+  const handleSubmit = () => {
+    if (isCheckedBox !== true) {
+      agreement();
+    } else {
+      setIsLoading(true);
+      axios
+        .post(`${process.env.REACT_APP_URL_BACKEND}/auth/login`, {
+          email,
+          password,
+        })
+        .then((res) => {
+          dispatch(profileReducer.setProfile(res?.data?.data?.profile));
+          dispatch(profileReducer.setToken(res?.data?.data?.token));
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    console.log(email);
-  }
+          setIsError(false);
+          setIsSuccess(true);
+          setSuccessMsg("Login successful");
 
-  React.useEffect(() => {
-    axios
-      .get(`${process.env.REACT_APP_URL_BACKEND}`)
-      .then((res) => console.log(res));
-
-    const isLogin = localStorage.getItem("isLogin");
-    const token = localStorage.getItem("token")
-
-    if(isLogin && token){
-      navigate("/")
+          setTimeout(() => {
+            navigate("/");
+          }, 1700);
+        })
+        .catch((err) => {
+          setIsSuccess(false);
+          setIsError(true);
+          setErrMsg(
+            err?.response?.data?.message ??
+              "System error, please try again later."
+          );
+        })
+        .finally(() => setIsLoading(false));
     }
-  },[]);
+  };
+
+  const maintenance = () => {
+    Swal.fire({
+      icon: "error",
+      title: "This feature is currently under maintenance !",
+      confirmButtonText: "OK",
+      confirmButtonColor: "#ffc720",
+    });
+  };
+
+  const agreement = () => {
+    Swal.fire({
+      icon: "error",
+      title: "You must agree to the terms and conditions of the agreement !",
+      confirmButtonText: "OK",
+      confirmButtonColor: "#ffc720",
+    });
+  };
+
+  const profile = useSelector((state) => state.profile);
+  useEffect(() => {
+    const isLogin = profile?.data?.payload;
+    const token = profile?.id?.payload;
+
+    if (isLogin && token) {
+      navigate("/");
+    }
+  }, [profile, navigate]);
 
   return (
     <div id="login">
@@ -47,9 +98,17 @@ const Login = () => {
             <h1>Welcome</h1>
             <p>Log in into your exiting account</p>
 
-            {isError ? (<div className="alert alert-danger" role="alert">
-              { errMsg }
-            </div>) : null}  
+            {isError ? (
+              <div className="alert alert-danger" role="alert">
+                {errMsg}
+              </div>
+            ) : null}
+
+            {isSuccess ? (
+              <div className="alert alert-success" role="alert">
+                {successMsg}
+              </div>
+            ) : null}
 
             {/* <!-- for email --> */}
             <div className="mb-3 width-form-login">
@@ -75,6 +134,11 @@ const Login = () => {
                 id="password-input"
                 placeholder="Password"
                 onChange={(event) => setPassword(event.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    handleSubmit();
+                  }
+                }}
               />
             </div>
             {/* <!-- check button --> */}
@@ -84,6 +148,7 @@ const Login = () => {
                 className="form-check-input"
                 id="agreement"
                 value=""
+                onChange={() => setIsCheckedBox(!isCheckedBox)}
               />
               <label className="form-check-label" htmlFor="flexCheckDefault">
                 I agree to terms & conditions
@@ -96,34 +161,16 @@ const Login = () => {
                 onKey
                 className="btn btn-primary btn-warning"
                 disabled={isLoading}
-                onClick={() => {
-                  setIsLoading(true)
-                  axios.post(`${process.env.REACT_APP_URL_BACKEND}/auth/login`, 
-                  {
-                    email,
-                    password,
-                  })
-                  .then((res) => {
-                    localStorage.setItem("isLogin", "true");
-                    localStorage.setItem("token", res?.data?.data?.token ?? "")
-                    localStorage.setItem("profile", JSON.stringify(res?.data?.data?.profile) ?? "")
-                    navigate("/")
-                  })
-                  .catch((err) => {
-                    setIsError(true);
-                    setErrMsg(err?.response?.data?.message ?? "System error, please try again later.")
-                  })
-                  .finally(() => setIsLoading(false))
-                }}
+                onClick={handleSubmit}
                 style={{ width: "100%" }}
               >
                 {isLoading ? "Loading..." : "Login"}
               </button>
             </div>
             {/* <!-- forgot password --> */}
-            <Link className="forgot-pass" to="../forgot">
+            <p className="forgot-pass" onClick={maintenance}>
               Forgot password ?
-            </Link>
+            </p>
             {/* <!-- sign up --> */}
             <p className="sign-up">
               Don't have an account? <Link to="../signup"> Sign up</Link>
@@ -133,6 +180,6 @@ const Login = () => {
       </div>
     </div>
   );
-}
+};
 
 export default Login;

@@ -2,8 +2,8 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useDispatch } from "react-redux";
-import * as recipeReducer from "../../store/recipes/index";
-import "../../styles/home.css"
+import * as recipeReducer from "../../store/reducer/recipe";
+import "../../styles/home.css";
 
 const RecipeCardHome = (props) => {
   const navigate = useNavigate();
@@ -17,7 +17,7 @@ const RecipeCardHome = (props) => {
   // }
 
   // const { item } = props
- 
+
   // return (
   //   <div>
   //     {/* <Link to={`/detail/${item?.slug}`} style={{textDecoration: "none", color: "#212529"}}>  */}
@@ -37,25 +37,21 @@ const RecipeCardHome = (props) => {
   // )
 
   const dispatch = useDispatch();
-  const {image, name, url} = props
+  const { image, name, id } = props;
 
-  return(
-    <div 
+  return (
+    <div
       className="clickable-image-home"
       onClick={() => {
         axios
-          .get(`${process.env.REACT_APP_URL_BACKEND}/recipes/${url}`)
-          .then(({data}) => {
-            console.log(data)
-            dispatch(recipeReducer.setDetail({
-              data: data?.data?.[0],
-              slug: url,
-              })
-            );
-            navigate(`/detail/${url}`);
-            console.log(data?.data?.[0]);
-          })
-      }} 
+          .get(`${process.env.REACT_APP_URL_BACKEND}/recipes/${id}`)
+          .then(({ data }) => {
+            dispatch(recipeReducer.setData(data?.data?.[0]));
+            dispatch(recipeReducer.setId(id));
+            navigate(`/detail/${id}`);
+            window.scrollTo(0, 0);
+          });
+      }}
     >
       <img
         src={image || "./images/unknown-food.webp"}
@@ -63,13 +59,11 @@ const RecipeCardHome = (props) => {
         width="80%"
         alt="Placeholder"
       />
-      <h2 className="image-title-home" style={{color: "white"}}>
+      <h2 className="image-title-home" style={{ color: "white" }}>
         {name || "Unknown Food"}
       </h2>
     </div>
-  )
-
-
-}
+  );
+};
 
 export default RecipeCardHome;

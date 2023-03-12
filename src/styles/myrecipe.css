@@ -95,16 +95,17 @@ body {
   color: black;
 }
 
-.clickable-image-profile {
+.clickable-image {
   margin-top: 5px;
   margin-left: 65px;
   object-fit: cover;
   position: relative;
 }
 
-.clickable-image-profile img {
+.clickable-image img {
   border-radius: 11px;
   height: 12rem;
+  object-fit: cover;
   width: 16.5rem;
   box-shadow: -1px 6px 27px -4px rgba(0,0,0,0.67);
   -webkit-box-shadow: -1px 6px 27px -4px rgba(0,0,0,0.67);
@@ -126,8 +127,7 @@ body {
   text-shadow: 1px 4px 2px rgba(0,0,0,0.6);
 }
 
-.clickable-image-profile:hover {
+.clickable-image:hover {
   transform: scale(1.1);
   transition: 0.5s;
 }
-/* profile section end */

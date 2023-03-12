@@ -65,6 +65,8 @@
   font-size: 13px;
   display: block;
   text-align: right;
+  margin-bottom: 0;
+  cursor: pointer;
 }
 
 .login-form .sign-up a {

@@ -156,8 +156,8 @@ body {
 /* new recipe end */
 
 
-/* start of popular-recipe css */
-#popular-recipe .title {
+/* start of popular recipe css */
+#search-recipe .title {
   font-style: normal;
   font-weight: 500;
   font-size: 38px;
@@ -170,13 +170,13 @@ body {
   padding-left: 20px;
 }
 
-#popular-recipe .clickable-image-home {
+#search-recipe .clickable-image-home {
   cursor: pointer;
   height: 400px;
   position: relative;
 }
 
-#popular-recipe .clickable-image-home img {
+#search-recipe .clickable-image-home img {
   cursor: pointer;
   border-radius: 10px;
   object-fit: cover;
@@ -185,19 +185,19 @@ body {
   -moz-box-shadow: -7px 8px 14px 3px rgba(0,0,0,0.75);
 }
 
-#popular-recipe .clickable-image-home:hover {
+#search-recipe .clickable-image-home:hover {
   transform: scale(1.1);
   transition: 0.5s;
 }
 
-/* end of popular-recipe css */
-/* popular recipe start */
-#popular-recipe {
+/* end of search-recipe css */
+/* search-recipe start */
+#search-recipe {
   margin-top: 80px;
   /* margin-bottom: 150px; */
 }
 
-#popular-recipe .title {
+#search-recipe .title {
   font-style: normal;
   font-weight: 500;
   font-size: 38px;
@@ -210,29 +210,29 @@ body {
   padding-left: 20px;
 }
 
-/* #popular-recipe .grid-wrapper {
+/* #search-recipe .grid-wrapper {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 20px 10px;
 } */
 
-#popular-recipe .clickable-image-home {
+#search-recipe .clickable-image-home {
   cursor: pointer;
   height: 360px;
   object-fit: cover;
   position: relative;
 }
 
-#popular-recipe .clickable-image-home img {
+#search-recipe .clickable-image-home img {
   border-radius: 10px;
 }
 
-#popular-recipe .clickable-image-home:hover {
+#search-recipe .clickable-image-home:hover {
   transform: scale(1.1);
   transition: 0.5s;
 }
 
-#popular-recipe .image-title-home {
+#search-recipe .image-title-home {
   position: absolute;
   z-index: 1;
   bottom: 67px;

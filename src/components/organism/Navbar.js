@@ -1,19 +1,23 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const Navbar = () => {
-  const [isLogin, setIsLogin] = React.useState(localStorage.getItem("isLogin"));
-  const [profile, setProfile] = React.useState(
-    localStorage.getItem("profile")
-      ? JSON.parse(localStorage.getItem("profile"))
-      : null
-  );
-
   const loginAlert = () => {
-    alert("Login required!");
-  }
+    Swal.fire({
+      icon: "error",
+      title: "Login required !",
+      confirmButtonText: "OK",
+      confirmButtonColor: "#ffc720",
+    });
+  };
 
-  React.useEffect(() => {
+  const data = useSelector((state) => state.profile);
+
+  const isLogin = data?.profile?.payload;
+
+  useEffect(() => {
     window.addEventListener("scroll", () => {
       if (window.pageYOffset > 500) {
         return document
@@ -43,7 +47,7 @@ const Navbar = () => {
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav">
               {isLogin ? (
-                <div style={{display: "inline-flex"}}>
+                <div style={{ display: "inline-flex" }}>
                   <li className="nav-item me-5">
                     <Link
                       className={`nav-link ${
@@ -83,10 +87,12 @@ const Navbar = () => {
                   </li>
                 </div>
               ) : (
-                <div style={{display: "inline-flex"}}>
+                <div style={{ display: "inline-flex" }}>
                   <li className="nav-item me-5">
                     <Link
-                      className="nav-link active"
+                      className={`nav-link ${
+                        window.location.pathname === "/" ? "active" : ""
+                      }`}
                       aria-current="page"
                       to="/"
                     >
@@ -95,12 +101,12 @@ const Navbar = () => {
                   </li>
                   <li className="nav-item me-5">
                     {/* <Link className="nav-link" onClick={alertLogin}>Add Recipe</Link> */}
-                    <Link className="nav-link" onClick={loginAlert} to="/">
+                    <Link className="nav-link" onClick={loginAlert} to="#">
                       Add Recipe
                     </Link>
                   </li>
                   <li className="nav-item me-5">
-                    <Link className="nav-link" onClick={loginAlert} to="/">
+                    <Link className="nav-link" onClick={loginAlert} to="#">
                       Profile
                     </Link>
                   </li>
@@ -108,26 +114,41 @@ const Navbar = () => {
               )}
             </ul>
           </div>
-          {isLogin ? (<div style={{display: "flex", alignItems: "end"}}>
-            <img className="online-logo" src="/images/online-logo.webp" alt="Online"/>
-            <img className="rounded-circle me-3 mt-2" src={`${profile.photo}`} alt="Profile" style={{width: "45px", zIndex: 0}}/>
-            <Link className="log-out" to="/logout"><p>Log Out</p></Link>
-          </div>) : (<div className="button-logres col-lg-2 col-xs-5">
-            <Link to="/login">
-              <button
-                type="button"
-                className="btn btn-warning shadow-sm"
-                style={{ marginRight: "13px" }}
-              >
-                Log In
-              </button>
-            </Link>
-            <Link to="/signup">
-              <button type="button" className="btn btn-light shadow-sm">
-                Register
-              </button>
-            </Link>
-          </div>)}
+          {isLogin ? (
+            <div style={{ display: "flex", alignItems: "end" }}>
+              <img
+                className="online-logo"
+                src="/images/online-logo.webp"
+                alt="Online"
+              />
+              <img
+                className="rounded-circle me-3 mt-2"
+                src={isLogin?.photo}
+                alt="Profile"
+                style={{ width: "45px", zIndex: 0 }}
+              />
+              <Link className="log-out" to="/logout">
+                <p>Logout</p>
+              </Link>
+            </div>
+          ) : (
+            <div className="button-logres col-lg-2 col-xs-5">
+              <Link to="/login">
+                <button
+                  type="button"
+                  className="btn btn-warning shadow-sm"
+                  style={{ marginRight: "13px" }}
+                >
+                  Login
+                </button>
+              </Link>
+              <Link to="/signup">
+                <button type="button" className="btn btn-light shadow-sm">
+                  Register
+                </button>
+              </Link>
+            </div>
+          )}
         </div>
       </nav>
     </div>

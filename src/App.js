@@ -1,5 +1,5 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { React } from "react";
+import React, { useState } from "react";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Logout from "./pages/Logout";
@@ -14,22 +14,23 @@ import ProfileLikedRecipe from "./pages/ProfileLikedRecipe";
 import CreateNewPassword from "./pages/CreateNewPassword";
 import AddRecipe from "./pages/AddRecipe";
 import EditProfile from "./pages/EditProfile";
-
-// import redux
+import { PersistGate } from "redux-persist/integration/react";
 import store from "./store/index";
 import { Provider } from "react-redux";
+import { persistStore } from "redux-persist";
 
 const App = () => {
+  let persistor = persistStore(store);
   // console.log(process.env.REACT_APP_IS_MAINTENANCE)
   // const maintenance = ["/forgot"]
-  // const [ isPageMaintenance, setIspageMaintenance ] = React.useState(
+  // const [ isPageMaintenance, setIspageMaintenance ] = useState(
   //   process.env.REACT_APP_IS_MAINTENANCE === "true" && maintenance.find((res) => res === document.location.pathname)
   // )
 
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <Home />
+      element: <Home />,
     },
     {
       path: "login",
@@ -45,41 +46,41 @@ const App = () => {
     },
     {
       path: "detail/:id",
-      element: <Detail />
+      element: <Detail />,
     },
     {
       path: "profile",
-      element: <ProfileMyRecipe />
+      element: <ProfileMyRecipe />,
     },
     {
       path: "profile/saved-recipe",
-      element: <ProfileSavedRecipe />
+      element: <ProfileSavedRecipe />,
     },
     {
       path: "profile/liked-recipe",
-      element: <ProfileLikedRecipe />
+      element: <ProfileLikedRecipe />,
     },
     {
       path: "add-recipe",
-      element: <AddRecipe />
+      element: <AddRecipe />,
     },
     {
       path: "forgot",
-      element: <ForgotPassword />
+      element: <ForgotPassword />,
     },
     {
       path: "forgot/verification",
-      element: <ForgotVerification />
+      element: <ForgotVerification />,
     },
     {
       path: "create-password",
-      element: <CreateNewPassword />
+      element: <CreateNewPassword />,
     },
     {
       path: "edit-profile",
-      element: <EditProfile />
-    }
-  ])
+      element: <EditProfile />,
+    },
+  ]);
 
   // if(true) {
   //   return <Maintenance />;
@@ -89,7 +90,7 @@ const App = () => {
 
   // if(isPageMaintenance){
   //   return (
-  //     <Maintenance 
+  //     <Maintenance
   //       maintenanceList = { maintenance }
   //       turnOnMaintenance = {() => setIspageMaintenance(true)}
   //       turnOffMaintenance = {() => setIspageMaintenance(false)}
@@ -101,10 +102,11 @@ const App = () => {
 
   return (
     <Provider store={store}>
-      <RouterProvider router={router} /> 
+      <PersistGate loading={null} persistor={persistor}>
+        <RouterProvider router={router} />
+      </PersistGate>
     </Provider>
-  
   );
-}
+};
 
 export default App;

@@ -1,146 +1,168 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "../styles/home.css";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, Router, useNavigate } from "react-router-dom";
 import Footer from "../components/organism/Footer";
 import RecipeCardHome from "../components/molecules/RecipeCardHome";
 import Placeholder from "../components/molecules/Placeholder";
 import Navbar from "../components/organism/Navbar";
 import axios from "axios";
+import Swal from "sweetalert2";
+import { useDispatch } from "react-redux";
+import * as recipeReducer from "../store/reducer/recipe";
 
 const Home = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
-  let [keyword, setKeyword] = React.useState(
-    "Discovery Recipe & Delicious Food"
-  );
-  let [menu, setMenu] = React.useState([]);
-  let [isLoading, setIsLoading] = React.useState(true);
-  let [currentPage, setCurrentPage] = React.useState(1);
-  let [totalPage, setTotalPage] = React.useState(1);
-  let [disablePagination, setDisablePagination] = React.useState(false);
+  const [searchedData, setSearchedData] = useState([]);
+  const [keyword, setKeyword] = useState("");
+  const [recipes, setRecipes] = useState([]);
+  const [newRecipe, setNewRecipe] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [sort, setSort] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPage, setTotalPage] = useState(1);
+  const [disablePagination, setDisablePagination] = useState(false);
+  const [sortBy, setSortBy] = useState(["created_at", "desc"]);
 
   let emptyArray = [1, 2, 3, 4, 5, 6];
 
-  // Did mount
-  React.useEffect(() => {
-    axios
-      .get(`${process.env.REACT_APP_URL_BACKEND}/recipes?page=1&limit=6`)
-      .then(({ data }) => {
-        console.log(data);
-        setMenu(data?.data);
-        let countPagination = Math.ceil(
-          parseInt(data?.all_pagination?.[0]?.count) / 6
-        );
-        setTotalPage(countPagination);
-      })
-      .catch(() => setMenu([]))
-      .finally(() => setIsLoading(false));
-  }, []);
-
-  const fetchPagination = (pageParam) => {
-    setIsLoading(true);
-    setMenu([]);
-    axios
-      .get(
-        `${process.env.REACT_APP_URL_BACKEND}/recipes?page=${pageParam}&limit=6`
-      )
-      .then(({ data }) => {
-        let countPagination = Math.ceil(
-          parseInt(data?.all_pagination?.[0]?.count) / 6
-        );
-        setMenu(data?.data);
-        setTotalPage(countPagination);
-        setCurrentPage(pageParam);
-        setDisablePagination(false);
-      })
-      .catch(() => setMenu([]))
-      .finally(() => setIsLoading(false));
-  };
+  console.log(keyword);
 
   const fetchByKeyWord = () => {
-    setIsLoading(true);
-
-    if (keyword && keyword !== "") {
-      axios
-        .get(`${process.env.REACT_APP_URL_BACKEND}/recipe-search/${keyword}?sort=asc`)
-        .then(({ data }) => {
-          setMenu(data?.data);
-          setDisablePagination(true);
-        })
-        .catch(() => setMenu([]))
-        .finally(() => setIsLoading(false));
-    } else {
-      axios
-        .get(`${process.env.REACT_APP_URL_BACKEND}/recipes?page=1&limit=6`)
-        .then(({ data }) => {
-          setMenu(data?.data);
-          let countPagination = Math.ceil(
-            parseInt(data?.all_pagination?.[0]?.count) / 6
-          );
-          setTotalPage(countPagination);
-        })
-        .catch(() => setMenu([]))
-        .finally(() => setIsLoading(false));
-    }
+    setSortBy(["created_at", "desc"]);
+    axios
+      .get(
+        `${process.env.REACT_APP_URL_BACKEND}/recipes/search/by?keyword=${keyword}&searchBy=title`
+      )
+      .then((res) => {
+        setSearchedData(res?.data?.data);
+      })
+      .catch((err) => {
+        Swal.fire({
+          icon: "error",
+          title: "There was an error from server !",
+          showCancelButton: false,
+          showCloseButton: false,
+        });
+      });
   };
 
-  const fetchBySort = (sortValue) => {
+  useEffect(() => {
     setIsLoading(true);
-    setMenu([]);
-    if(sortValue === "1"){
-      axios
-        .get(`${process.env.REACT_APP_URL_BACKEND}/recipes?sort=created_at_desc`)
-        .then(({ data }) => {
-          setMenu(data?.data);
-          setDisablePagination(true);
-        })
-        .catch(() => setMenu([]))
-        .finally(() => setIsLoading(false));
-    } else if (sortValue === "2") {
-      axios
-      .get(`${process.env.REACT_APP_URL_BACKEND}/recipes?sort=created_at_asc`)
-      .then(({ data }) => {
-        setMenu(data?.data);
-        setDisablePagination(true);
-      })
-      .catch(() => setMenu([]))
-      .finally(() => setIsLoading(false));
-    } else if (sortValue === "3") {
-      axios
-      .get(`${process.env.REACT_APP_URL_BACKEND}/recipes?sort=title_asc`)
-      .then(({ data }) => {
-        setMenu(data?.data);
-        setDisablePagination(true);
-      })
-      .catch(() => setMenu([]))
-      .finally(() => setIsLoading(false));
-    } else if (sortValue === "4") {
-      axios
-      .get(`${process.env.REACT_APP_URL_BACKEND}/recipes?sort=title_desc`)
-      .then(({ data }) => {
-        setMenu(data?.data);
-        setDisablePagination(true);
-      })
-      .catch(() => setMenu([]))
-      .finally(() => setIsLoading(false));
-    }
-  };
 
-  // Did update
-  React.useEffect(() => {
-    console.log("Loading berubah");
-  }, [isLoading, keyword]);
+    const fetchNewRecipe = axios.get(
+      `${process.env.REACT_APP_URL_BACKEND}/recipes?sort=created_at&typeSort=desc`
+    );
 
-  React.useEffect(() => {
-    window.addEventListener("scroll", () => {
-      if (window.pageYOffset > 600) {
-        return document
-          .querySelector(".navbar")
-          .classList.add("navbar-background");
-      } else {
-        document.querySelector(".navbar").classList.remove("navbar-background");
-      }
-    });
+    const fetchPopularRecipe = axios.get(
+      `${process.env.REACT_APP_URL_BACKEND}/recipes?sort=created_at&typeSort=desc&page=${currentPage}&limit=6`
+    );
+
+    Promise.all([fetchNewRecipe, fetchPopularRecipe])
+      .then((res) => {
+        setNewRecipe(res?.[0]?.data?.data?.[0]);
+
+        setRecipes(res?.[1]?.data?.data);
+
+        setTotalPage(
+          Math.ceil(res?.[1]?.data?.total_all_data / res?.[1]?.data?.limit)
+        );
+      })
+      .catch((err) => {
+        console.log("error pas promise");
+        console.log(err);
+        setIsLoading(false);
+        Swal.fire({
+          icon: "error",
+          title: "Cannot get data from server!",
+          showCancelButton: false,
+          showCloseButton: false,
+        });
+      })
+      .finally(() => {
+        setIsLoading(false);
+        window.addEventListener("scroll", () => {
+          if (window.pageYOffset > 600) {
+            return document
+              .querySelector(".navbar")
+              .classList.add("navbar-background");
+          } else {
+            document
+              .querySelector(".navbar")
+              .classList.remove("navbar-background");
+          }
+        });
+      });
   }, []);
+
+  const fetchPagination = (positionPage) => {
+    setIsLoading(true);
+
+    axios
+      .get(
+        `${process.env.REACT_APP_URL_BACKEND}/recipes?sort=${sortBy[0]}&typeSort=${sortBy[1]}&page=${currentPage}&limit=6`
+      )
+      .then(({ data }) => {
+        setIsLoading(false);
+        setRecipes(data?.data);
+        setTotalPage(Math.ceil(data?.total_all_data / data?.limit));
+        setCurrentPage(positionPage);
+      })
+      .catch((error) => {
+        setIsLoading(false);
+        Swal.fire({
+          icon: "error",
+          title: "There was an error from server !",
+          showCancelButton: false,
+          showCloseButton: false,
+        });
+      });
+  };
+
+  useEffect(() => {
+    setIsLoading(true);
+    if (!keyword) {
+      axios
+        .get(
+          `${process.env.REACT_APP_URL_BACKEND}/recipes?sort=${sortBy[0]}&typeSort=${sortBy[1]}&page=${currentPage}&limit=6`
+        )
+        .then(({ data }) => {
+          setRecipes(data?.data);
+          setTotalPage(Math.ceil(data?.total_all_data / data?.limit));
+          setIsLoading(false);
+        })
+        .catch((error) => {
+          setIsLoading(false);
+          Swal.fire({
+            icon: "error",
+            title: "There was an error from server !",
+            showCancelButton: false,
+            showCloseButton: false,
+          });
+        })
+        .finally(() => {
+          setIsLoading(false);
+        });
+    } else {
+      setIsLoading(false);
+      axios
+        .get(
+          `${process.env.REACT_APP_URL_BACKEND}/recipes/search/by?sort=${sortBy[0]}&typeSort=${sortBy[1]}&keyword=${keyword}&searchBy=title`
+        )
+        .then((res) => {
+          setSearchedData(res?.data?.data);
+        })
+        .catch((err) => {
+          console.log(err);
+          Swal.fire({
+            icon: "error",
+            title: "Cannot get data from server saasa!",
+            showCancelButton: false,
+            showCloseButton: false,
+          });
+        });
+    }
+  }, [sortBy, currentPage]);
 
   return (
     <div style={{ overflowX: "hidden" }}>
@@ -170,8 +192,8 @@ const Home = () => {
                   }}
                   onKeyDown={(e) => {
                     if (e.key === "Enter") {
-                      window.location.href = "/#popular-recipe";
-                      fetchByKeyWord();
+                      window.location.href = "#search-recipe";
+                      fetchByKeyWord(e.target.value);
                     }
                   }}
                 />
@@ -212,64 +234,108 @@ const Home = () => {
         <div className="background-overlay"></div>
         {/* <!-- content --> */}
         <div className="container">
+          {/* <!-- left side --> */}
           <div className="row align-items-center">
-            {/* <!-- left side --> */}
-            <div className="col-lg-6 col-xs-12">
-              <img
-                src={require("../images/risotto.webp")}
-                className="main-image"
-                alt="Food"
-              />
-            </div>
+            {isLoading ? (
+              <div className="col-lg-6 col-xs-12">
+                <img
+                  src={
+                    "https://www.slntechnologies.com/wp-content/uploads/2017/08/ef3-placeholder-image.jpg"
+                  }
+                  className="main-image"
+                  alt="Food"
+                />
+              </div>
+            ) : (
+              <div className="col-lg-6 col-xs-12">
+                <img
+                  src={
+                    newRecipe?.photo ??
+                    "https://www.slntechnologies.com/wp-content/uploads/2017/08/ef3-placeholder-image.jpg"
+                  }
+                  className="main-image"
+                  alt="Food"
+                />
+              </div>
+            )}
 
             {/* <!-- right side --> */}
             <div
               className="col-lg-5 col-xs-12 offset-1"
               style={{ marginTop: "50px", marginLeft: "15px" }}
             >
-              <h2>
-                Risotto <br />
-                (Quick & Easy)
-              </h2>
+              {isLoading ? (
+                <p className="placeholder-glow">
+                  <span className="placeholder col-12"></span>
+                  <span className="placeholder col-12"></span>
+                  <span className="placeholder col-12"></span>
+                </p>
+              ) : (
+                <>
+                  <h2>{newRecipe?.title}</h2>
 
-              <p>
-                Master this collection of classNameic Italian risotto recipes.
-                Try autumnal pumpkin and butternut squash, or the winning
-                standby combination of chorizo & pea risotto.
-              </p>
-              <Link to="/detail">
-                <button type="button" className="btn btn-warning">
-                  See More
-                </button>
-              </Link>
+                  <p>{newRecipe?.description}</p>
+                  <button
+                    type="button"
+                    className="btn btn-warning"
+                    onClick={() => {
+                      axios
+                        .get(
+                          `${process.env.REACT_APP_URL_BACKEND}/recipes/${newRecipe?.id}`
+                        )
+                        .then((res) => {
+                          dispatch(recipeReducer.setData(recipes[0]));
+                          dispatch(recipeReducer.setId(newRecipe?.id));
+                          navigate(`/detail/${newRecipe?.id}`);
+
+                          window.scrollTo(0, 0);
+                        })
+                        .catch((err) => {
+                          console.log(err);
+                        });
+                    }}
+                  >
+                    See More
+                  </button>
+                </>
+              )}
             </div>
           </div>
         </div>
       </section>
-      {/* <!-- new recipe end --> */}
 
-      {/* <!-- popular recipe start --> */}
-      {/* <!-- popular recipe --> */}
-      <section id="popular-recipe">
+      <section id="search-recipe">
         <div className="container">
-          {/* <!-- title --> */}
           <div className="container">
             <div className="row align-self-center">
               <div className="col">
-                <h2 className="title">Popular Recipe</h2>
+                <h2 className="title">
+                  {keyword === "" ? "Popular recipe" : "Searched recipe"}
+                </h2>
               </div>
               <div className="col-2">
                 <select
                   className="form-select"
                   aria-label="Default select example"
                   style={{ marginLeft: "-35%", marginTop: "11%" }}
-                  onChange={(e) => {
-                    fetchBySort(e.target.value)
-                    console.log(e.target.value)
+                  onChange={(event) => {
+                    const value = event.target.value;
+                    if (value === "1" || value === "0") {
+                      // Newest
+                      setSortBy(["created_at", "desc"]);
+                    } else if (value === "2") {
+                      setSortBy(["created_at", "asc"]);
+                      // A-Z
+                    } else if (value === "3") {
+                      setSortBy(["title", "-"]);
+                      // Z-A
+                    } else {
+                      setSortBy(["title", "desc"]);
+                    }
                   }}
                 >
-                  <option selected disabled>
-                    Sort by
+                  <option value="0" selected>
+                    Default
                   </option>
                   <option value="1">Newest update</option>
                   <option value="2">Oldest update</option>
@@ -281,13 +347,14 @@ const Home = () => {
           </div>
 
           <div className="row">
-            {isLoading
-              ? emptyArray.map((item) => (
-                  <div className="col-lg-4 col-6">
-                    <Placeholder />
-                  </div>
-                ))
-              : menu.map((item, key) => (
+            {isLoading &&
+              emptyArray.map((item) => (
+                <div className="col-lg-4 col-6">
+                  <Placeholder />
+                </div>
+              ))}
+            {!keyword
+              ? recipes.map((item, key) => (
                   <div
                     className="col-lg-4 col-6"
                     style={{ transitionDuration: "1s" }}
@@ -297,11 +364,25 @@ const Home = () => {
                     <RecipeCardHome
                       image={item?.photo}
                       name={item?.title}
-                      url={item?.slug}
+                      id={item?.id}
+                    />
+                  </div>
+                ))
+              : searchedData.map((item, key) => (
+                  <div
+                    className="col-lg-4 col-6"
+                    style={{ transitionDuration: "1s" }}
+                    key={key}
+                  >
+                    {/* <RecipeCardHome item={item} /> */}
+                    <RecipeCardHome
+                      image={item?.photo}
+                      name={item?.title}
+                      id={item?.id}
                     />
                   </div>
                 ))}
-            {menu.length === 0 && !isLoading ? (
+            {recipes.length === 0 && !isLoading ? (
               <h2>Recipe is not found</h2>
             ) : null}
           </div>
@@ -332,14 +413,11 @@ const Home = () => {
                 onClick={() => {
                   if (currentPage > 1) fetchPagination(currentPage - 1);
                 }}
+                href=""
               >
                 Previous
               </a>
             </li>
-            {/* {console.log({
-            array1: totalPage,
-            array2: 
-          })} */}
             {[...new Array(totalPage)].map((item, key) => {
               let position = ++key;
               return (

@@ -1,25 +1,66 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "../styles/register.css";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Register = () => {
-  const navigate = useNavigate();
-  const [name, setName] = React.useState("");
-  const [email, setEmail] = React.useState("");
-  const [phoneNumber, setPhoneNumber] = React.useState("");
-  const [password, setPassword] = React.useState("");
-  // const [isSamePass, setIsSamePass] = React.useState("");
-  const [isError, setIsError] = React.useState(false);
-  const [errMsg, setErrMsg] = React.useState("");
-  const [isLoading, setIsLoading] = React.useState(false);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [password, setPassword] = useState("");
+  const [isSamePass, setIsSamePass] = useState("");
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [successMsg, setSuccessMsg] = useState("");
+  const [isError, setIsError] = useState(false);
+  const [errMsg, setErrMsg] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
-  React.useEffect(() => {
-    axios
-      .get(`${process.env.REACT_APP_URL_BACKEND}`)
-      .then((res) => console.log(res));
-  }, []);
+  const navigate = useNavigate();
+  const profile = useSelector((state) => state.profile);
+
+  useEffect(() => {
+    const isLogin = profile?.profile?.payload;
+    if (isLogin) {
+      navigate("/");
+    }
+  }, [profile, navigate]);
+
+  const registerHandle = () => {
+    setIsLoading(true);
+    if (password !== isSamePass) {
+      setIsLoading(false);
+      setIsError(true);
+      setErrMsg("Confirm your password is wrong");
+    } else {
+      axios
+        .post(`${process.env.REACT_APP_URL_BACKEND}/users/add`, {
+          name,
+          email,
+          phone: phoneNumber,
+          password,
+        })
+        .then((res) => {
+          setIsError(false);
+          setIsSuccess(true);
+          setSuccessMsg("Login successful");
+
+          setTimeout(() => {
+            navigate("/login");
+          }, 1700);
+        })
+        .catch((err) => {
+          setIsSuccess(false);
+          setIsError(true);
+          setErrMsg(
+            err?.response?.data?.message ??
+              "System error, please try again later."
+          );
+        })
+        .finally(() => setIsLoading(false));
+    }
+  };
 
   return (
     <div id="register">
@@ -38,13 +79,16 @@ const Register = () => {
           <div className="reg-form" height="89%">
             <h1>Let's Get Started !</h1>
             <p className="create">Create new account to access all features</p>
-
             {isError ? (
               <div className="alert alert-danger" role="alert">
                 {errMsg}
               </div>
             ) : null}
-
+            {isSuccess ? (
+              <div className="alert alert-success" role="alert">
+                {successMsg}
+              </div>
+            ) : null}
             {/* <!-- for name --> */}
             <div className="width-form-register">
               <label htmlFor="name-input" className="form-label">
@@ -100,14 +144,19 @@ const Register = () => {
             {/* <!-- for new password --> */}
             <div className="width-form-register">
               <label htmlFor="password-input" className="form-label">
-                New Password
+                Confirm New Password
               </label>
               <input
                 type="password"
                 className="form-control"
                 id="password-input"
                 placeholder="New Password"
-                onChange={(event) => setPassword(event.target.value)}
+                onChange={(event) => setIsSamePass(event.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    registerHandle();
+                  }
+                }}
               />
             </div>
             {/* <!-- sign up button --> */}
@@ -116,36 +165,17 @@ const Register = () => {
                 type="button"
                 className="btn btn-primary btn-warning"
                 disabled={isLoading}
-                onClick={() => {
-                  setIsLoading(true)
-    
-                  axios.post(`${process.env.REACT_APP_URL_BACKEND}/users`, 
-                  {
-                    name,
-                    email,
-                    phone: phoneNumber,
-                    password,
-                  })
-                  .then((res) => {
-                    navigate("/login")
-                  })
-                  .catch((err) => {
-                    setIsError(true);
-                    console.log({err: err.response})
-                    setErrMsg(err?.response?.data?.message ?? "System error, please try again later.")
-                  })
-                  .finally(() => setIsLoading(false))
-                }}
+                onClick={registerHandle}
                 style={{ marginTop: "15px" }}
               >
                 {isLoading ? "Loading..." : "Register"}
               </button>
             </div>
             {/* <!-- login --> */}
-            <p className="log-in">
+            <p className="log-in text-center">
               Already have account?{" "}
               <Link to="../login" style={{ color: "#EFC81A" }}>
-                Log in Here
+                Login Here
               </Link>
             </p>
           </div>
@@ -153,6 +183,6 @@ const Register = () => {
       </div>
     </div>
   );
-}
+};
 
 export default Register;
