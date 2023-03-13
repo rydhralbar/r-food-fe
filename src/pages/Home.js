@@ -40,8 +40,8 @@ const Home = () => {
         Swal.fire({
           icon: "error",
           title: `Recipe with keyword ${keyword} is not found`,
-          showCancelButton: false,
-          showCloseButton: false,
+          confirmButtonText: "OK",
+          confirmButtonColor: "#ffc720",
         });
       });
   };
@@ -73,8 +73,8 @@ const Home = () => {
           icon: "error",
           title:
             err?.response?.data?.message || "There was an error from server",
-          showCancelButton: false,
-          showCloseButton: false,
+          confirmButtonText: "OK",
+          confirmButtonColor: "#ffc720",
         });
       })
       .finally(() => {
@@ -135,8 +135,8 @@ const Home = () => {
             icon: "error",
             title:
               err?.response?.data?.message || "There was an error from server",
-            showCancelButton: false,
-            showCloseButton: false,
+            confirmButtonText: "OK",
+            confirmButtonColor: "#ffc720",
           });
         })
         .finally(() => {
@@ -157,8 +157,8 @@ const Home = () => {
             icon: "error",
             title:
               err?.response?.data?.message || "There was an error from server",
-            showCancelButton: false,
-            showCloseButton: false,
+            confirmButtonText: "OK",
+            confirmButtonColor: "#ffc720",
           });
         });
     }
