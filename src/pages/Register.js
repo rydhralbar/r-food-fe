@@ -44,7 +44,7 @@ const Register = () => {
         .then((res) => {
           setIsError(false);
           setIsSuccess(true);
-          setSuccessMsg("Login successful");
+          setSuccessMsg("Register successful");
 
           setTimeout(() => {
             navigate("/login");

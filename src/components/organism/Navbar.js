@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
@@ -55,6 +55,9 @@ const Navbar = () => {
                       }`}
                       aria-current="page"
                       to="/"
+                      onClick={() => {
+                        window.scrollTo(0, 0);
+                      }}
                     >
                       Home
                     </Link>
@@ -84,6 +87,9 @@ const Navbar = () => {
                           : ""
                       }`}
                       to="/profile"
+                      onClick={() => {
+                        window.scrollTo(0, 0);
+                      }}
                     >
                       Profile
                     </Link>
@@ -124,12 +130,19 @@ const Navbar = () => {
                 src="/images/online-logo.webp"
                 alt="Online"
               />
-              <img
-                className="rounded-circle me-3 mt-2"
-                src={isLogin?.photo}
-                alt="Profile"
-                style={{ width: "45px", zIndex: 0 }}
-              />
+              <Link
+                to="/profile"
+                onClick={() => {
+                  window.scrollTo(0, 0);
+                }}
+              >
+                <img
+                  className="rounded-circle me-3 mt-2"
+                  src={isLogin?.photo}
+                  alt="Profile"
+                  style={{ width: "45px", zIndex: 0 }}
+                />
+              </Link>
               <Link className="log-out" to="/logout">
                 <p>Logout</p>
               </Link>

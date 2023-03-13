@@ -1,5 +1,5 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import React, { useState } from "react";
+import React from "react";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Logout from "./pages/Logout";
@@ -11,7 +11,6 @@ import ForgotVerification from "./pages/ForgotVerification";
 // import Maintenance from "./pages/Maintenance";
 import CreateNewPassword from "./pages/CreateNewPassword";
 import AddRecipe from "./pages/AddRecipe";
-import EditProfile from "./pages/EditProfile";
 import { PersistGate } from "redux-persist/integration/react";
 import store from "./store/index";
 import { Provider } from "react-redux";
@@ -64,10 +63,6 @@ const App = () => {
     {
       path: "create-password",
       element: <CreateNewPassword />,
-    },
-    {
-      path: "edit-profile",
-      element: <EditProfile />,
     },
   ]);
 
