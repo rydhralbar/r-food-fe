@@ -112,7 +112,7 @@ body {
   -moz-box-shadow: -1px 6px 27px -4px rgba(0,0,0,0.67);
 }
 
-.image-title-profile {
+.image-title {
   color: white;
   position: absolute;
   z-index: 1;
