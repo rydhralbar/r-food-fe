@@ -36,9 +36,10 @@ const Home = () => {
         setSearchedData(res?.data?.data);
       })
       .catch((err) => {
+        console.log(err);
         Swal.fire({
           icon: "error",
-          title: "There was an error from server !",
+          title: `Recipe with keyword ${keyword} is not found`,
           showCancelButton: false,
           showCloseButton: false,
         });
@@ -70,7 +71,8 @@ const Home = () => {
         setIsLoading(false);
         Swal.fire({
           icon: "error",
-          title: "Cannot get data from server!",
+          title:
+            err?.response?.data?.message || "There was an error from server",
           showCancelButton: false,
           showCloseButton: false,
         });
@@ -131,7 +133,8 @@ const Home = () => {
           setIsLoading(false);
           Swal.fire({
             icon: "error",
-            title: "There was an error from server !",
+            title:
+              err?.response?.data?.message || "There was an error from server",
             showCancelButton: false,
             showCloseButton: false,
           });
@@ -152,7 +155,8 @@ const Home = () => {
           console.log(err);
           Swal.fire({
             icon: "error",
-            title: "Cannot get data from server saasa!",
+            title:
+              err?.response?.data?.message || "There was an error from server",
             showCancelButton: false,
             showCloseButton: false,
           });
