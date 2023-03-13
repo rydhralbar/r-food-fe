@@ -129,7 +129,7 @@ const Home = () => {
           setTotalPage(Math.ceil(data?.total_all_data / data?.limit));
           setIsLoading(false);
         })
-        .catch((error) => {
+        .catch((err) => {
           setIsLoading(false);
           Swal.fire({
             icon: "error",
