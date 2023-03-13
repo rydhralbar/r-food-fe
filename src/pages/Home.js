@@ -36,7 +36,7 @@ const Home = () => {
         setSearchedData(res?.data?.data);
       })
       .catch((err) => {
-        console.log(err);
+        window.scrollTo(0, 0);
         Swal.fire({
           icon: "error",
           title: `Recipe with keyword ${keyword} is not found`,
