@@ -167,7 +167,7 @@ const AddRecipe = () => {
             type="text"
             className="form-control"
             id="exampleFormControlInput1"
-            placeholder="Enter your video link"
+            placeholder="Enter your video link, example: https://www.youtube.com/embed/********"
             onChange={(e) => {
               setVideo(e.target.value);
             }}

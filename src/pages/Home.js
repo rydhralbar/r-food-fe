@@ -39,7 +39,9 @@ const Home = () => {
         window.scrollTo(0, 0);
         Swal.fire({
           icon: "error",
-          title: `Recipe with keyword ${keyword} is not found`,
+          title: keyword
+            ? `Recipe with keyword ${keyword} is not found`
+            : "Keyword cannot be empty",
           confirmButtonText: "OK",
           confirmButtonColor: "#ffc720",
         });
