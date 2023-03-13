@@ -1,6 +1,6 @@
-# Getting Started with Create React App
+# Getting Started with R-Food App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+R Food is a website where you can get recipes for five-star meals that you can make yourself. It was created using React JS, Node JS, and Express JS. This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
 
