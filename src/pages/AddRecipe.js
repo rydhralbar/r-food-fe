@@ -40,9 +40,14 @@ const AddRecipe = () => {
         Swal.fire({
           icon: "success",
           title: `${res.data.message}`,
+          confirmButtonText: "OK",
+          confirmButtonColor: "#ffc720",
+        }).then((_res) => {
+          if (_res?.isConfirmed) {
+            window.scrollTo(0, 0);
+            refreshPage();
+          }
         });
-        refreshPage();
-        window.scrollTo(0, 0);
       })
       .catch((err) => {
         if (err.response.status === 401) {

@@ -20,17 +20,22 @@
 
 #detail-page .mark-recipe .favorite-logo {
   width: 38px;
-  margin-right: 70px;
   margin-left: 16px;
   background-color: #EFC81A;
   padding: 8px;
   border-radius: 3px;
 }
 
-#detail-page .mark-recipe .like-logo:hover {
-  background-color: grey;
+#detail-page .mark-recipe .delete-logo {
+  width: 43px;
+    height: 44px;
+  margin-right: 70px;
+  margin-left: 16px;
+  background-color: red;
+  padding: 8px;
+  border-radius: 3px;
 }
 
-#detail-page .mark-recipe .favorite-logo:hover {
-  background-color: grey;
+#detail-page .mark-recipe .delete-logo:hover {
+  background-color: white;
 }

@@ -255,7 +255,7 @@ const ProfileMyRecipe = () => {
           </ul>
         </div>
         <div className="row" style={{ marginRight: "100px" }}>
-          {userRecipes ? (
+          {userRecipes.length > 0 ? (
             userRecipes.slice(0, 8)?.map((item) => (
               <div className="col-3 col-3" style={{ marginBottom: "28px" }}>
                 <RecipeCard
@@ -266,7 +266,7 @@ const ProfileMyRecipe = () => {
               </div>
             ))
           ) : (
-            <h4 style={{ marginLeft: "70px", marginTop: "25px" }}>
+            <h4 style={{ marginLeft: "70px", marginTop: "30px" }}>
               You don't have a recipe yet
             </h4>
           )}

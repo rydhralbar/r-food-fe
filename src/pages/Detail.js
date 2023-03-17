@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "../styles/detail.css";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Footer from "../components/organism/Footer";
 import Comment from "../components/molecules/Comment";
 import FoodRecipe from "../components/organism/FoodRecipe";
@@ -33,15 +33,6 @@ const Detail = () => {
   const profile = useSelector((state) => state.profile);
 
   const recipe = data?.data?.payload;
-
-  const loginAlert = () => {
-    Swal.fire({
-      icon: "error",
-      title: "Login required !",
-      confirmButtonText: "OK",
-      confirmButtonColor: "#ffc720",
-    });
-  };
 
   const maintenance = () => {
     Swal.fire({
@@ -76,7 +67,7 @@ const Detail = () => {
         document.querySelector(".navbar").classList.remove("navbar-background");
       }
     });
-  }, []);
+  }, [navigate, data, recipe?.id]);
 
   return (
     <div>
@@ -88,6 +79,8 @@ const Detail = () => {
       >
         <div>
           <FoodRecipe
+            idRecipe={recipe?.id}
+            userId={recipe?.user_id}
             title={recipe?.title}
             photo={recipe?.photo}
             ingredients={recipe?.ingredients}

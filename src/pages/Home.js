@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "../styles/home.css";
-import { Link, Router, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Footer from "../components/organism/Footer";
 import RecipeCardHome from "../components/molecules/RecipeCardHome";
 import Placeholder from "../components/molecules/Placeholder";
@@ -18,7 +18,6 @@ const Home = () => {
   const [recipes, setRecipes] = useState([]);
   const [newRecipe, setNewRecipe] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [sort, setSort] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPage, setTotalPage] = useState(1);
   const [sortBy, setSortBy] = useState(["created_at", "desc"]);
@@ -93,7 +92,7 @@ const Home = () => {
           }
         });
       });
-  }, []);
+  }, [currentPage]);
 
   const fetchPagination = (positionPage) => {
     setIsLoading(true);
@@ -164,7 +163,7 @@ const Home = () => {
           });
         });
     }
-  }, [sortBy, currentPage]);
+  }, [sortBy, currentPage, keyword]);
 
   return (
     <div style={{ overflowX: "hidden" }}>
