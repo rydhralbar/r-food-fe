@@ -260,6 +260,10 @@ body {
   --bs-pagination-active-color: black;
 }
 
+.notAllowed {
+  cursor: not-allowed;
+}
+
 .previous {
   --bs-disabled-color: grey;
   --bs-disabled-border-color: black;

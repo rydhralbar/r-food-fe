@@ -335,10 +335,10 @@ const Home = () => {
                     }
                   }}
                 >
-                  <option value="0" selected>
-                    Default
+                  <option value="0" selected disabled>
+                    Sort by
                   </option>
-                  <option value="1">Newest update</option>
+                  <option value="1">Newest update (Default)</option>
                   <option value="2">Oldest update</option>
                   <option value="3">A-Z</option>
                   <option value="4">Z-A</option>

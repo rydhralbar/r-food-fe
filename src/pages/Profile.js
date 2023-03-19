@@ -23,6 +23,7 @@ const ProfileMyRecipe = () => {
   const token = data?.token?.payload;
 
   useEffect(() => {
+    setIsLoading(true);
     axios
       .get(
         `${process.env.REACT_APP_URL_BACKEND}/recipes?sort=created_at&typeSort=desc`
@@ -34,7 +35,13 @@ const ProfileMyRecipe = () => {
         );
         setUserRecipes(myRecipe);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        Swal.fire({
+          icon: "error",
+          title: `${err.response.data.message}`,
+        });
+      })
+      .finally(() => setIsLoading(false));
   }, [profile]);
 
   useEffect(() => {
@@ -85,7 +92,6 @@ const ProfileMyRecipe = () => {
         }, 1000);
       })
       .catch((err) => {
-        console.log("error", err);
         Swal.fire({
           icon: "error",
           title: `${err.response.data.message}`,
@@ -254,23 +260,43 @@ const ProfileMyRecipe = () => {
             </li>
           </ul>
         </div>
-        <div className="row" style={{ marginRight: "100px" }}>
-          {userRecipes.length > 0 ? (
-            userRecipes.slice(0, 8)?.map((item) => (
-              <div className="col-3 col-3" style={{ marginBottom: "28px" }}>
-                <RecipeCard
-                  image={item?.photo}
-                  name={item?.title}
-                  id={item?.id}
-                />
-              </div>
-            ))
-          ) : (
-            <h4 style={{ marginLeft: "70px", marginTop: "30px" }}>
-              You don't have a recipe yet
-            </h4>
-          )}
-        </div>
+        {!isLoading ? (
+          <div className="row" style={{ marginRight: "100px" }}>
+            {userRecipes.length > 0 ? (
+              userRecipes.slice(0, 8)?.map((item) => (
+                <div className="col-3 col-3" style={{ marginBottom: "28px" }}>
+                  <RecipeCard
+                    image={item?.photo}
+                    name={item?.title}
+                    id={item?.id}
+                  />
+                </div>
+              ))
+            ) : (
+              <h4 style={{ marginLeft: "70px", marginTop: "30px" }}>
+                You don't have a recipe yet
+              </h4>
+            )}
+          </div>
+        ) : (
+          <div class="d-flex justify-content-center mt-5">
+            <div class="spinner-grow text-warning" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+            <div class="spinner-grow text-warning" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+            <div class="spinner-grow text-warning" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+            <div class="spinner-grow text-warning" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+            <div class="spinner-grow text-warning" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+          </div>
+        )}
         {userRecipes.length > 8 && (
           <div
             className={`d-flex justify-content-center ${seeMore && "d-none"}`}
