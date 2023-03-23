@@ -152,7 +152,7 @@ const FoodRecipe = (props) => {
       <ul style={{ marginLeft: "5%", marginTop: "40px" }}>
         {ingredientList.map((item, key) => (
           <>
-            <li>{item}</li>
+            <li>{item.charAt(0).toUpperCase() + item?.slice(1)}</li>
             <br />
           </>
         ))}

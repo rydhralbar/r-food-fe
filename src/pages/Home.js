@@ -188,8 +188,10 @@ const Home = () => {
                   className="form-control form-control-lg"
                   id="form-search"
                   placeholder="Search Recipe..."
-                  onChange={(event) => {
-                    setKeyword(event.target.value);
+                  onChange={(e) => {
+                    setTimeout(() => {
+                      setKeyword(e.target.value);
+                    }, 1500);
                   }}
                   onKeyDown={(e) => {
                     if (e.key === "Enter") {
@@ -319,8 +321,8 @@ const Home = () => {
                   className="form-select"
                   aria-label="Default select example"
                   style={{ marginLeft: "-35%", marginTop: "11%" }}
-                  onChange={(event) => {
-                    const value = event.target.value;
+                  onChange={(e) => {
+                    const value = e.target.value;
                     if (value === "1" || value === "0") {
                       // Newest
                       setSortBy(["created_at", "desc"]);
@@ -399,7 +401,7 @@ const Home = () => {
       {/* <!-- pagination start --> */}
       {!isLoading && !disablePagination && (
         <nav
-          className="pagination-mobile"
+          className={`pagination-mobile ${keyword && "d-none"}`}
           aria-label="..."
           style={{
             display: "flex",

@@ -77,19 +77,21 @@ const ProfileMyRecipe = () => {
         config
       )
       .then((res) => {
-        console.log("berhasil", res);
-        Swal.fire({
-          icon: "success",
-          title: `${res.data.message}`,
-        });
         dispatch(profileReducer.setProfile(res?.data?.data[0]));
 
         resetInput();
         setEditPhoto();
         setEditName("");
-        setTimeout(() => {
-          refreshPage();
-        }, 1000);
+        Swal.fire({
+          icon: "success",
+          title: `${res.data.message}`,
+          confirmButtonText: "OK",
+          confirmButtonColor: "#ffc720",
+        }).then((res) => {
+          if (res.isConfirmed) {
+            refreshPage();
+          }
+        });
       })
       .catch((err) => {
         Swal.fire({
@@ -200,7 +202,8 @@ const ProfileMyRecipe = () => {
                     <input
                       type="text"
                       className="form-control"
-                      placeholder={profile?.name}
+                      // placeholder={profile?.name}
+                      defaultValue={profile?.name}
                       onChange={(e) => {
                         setEditName(e.target.value);
                       }}

@@ -151,6 +151,7 @@ const Detail = () => {
               id="exampleFormControlTextarea1"
               rows="3"
               placeholder="Comment :"
+              disabled
             ></textarea>
             <button
               type="button"
@@ -160,7 +161,8 @@ const Detail = () => {
                   maintenance();
                 }
               }}
-              disabled={!profile?.profile?.payload}
+              // disabled={!profile?.profile?.payload}
+              disabled
             >
               Send
             </button>
