@@ -14,6 +14,10 @@ const FoodRecipe = (props) => {
   const userIdRedux = profile?.profile?.payload?.id;
   const navigate = useNavigate();
 
+  console.log(userIdRedux);
+  console.log(userId);
+  console.log(userId !== userIdRedux);
+
   const [ingredientList, setIngredientList] = useState([]);
 
   const maintenance = () => {
@@ -76,7 +80,15 @@ const FoodRecipe = (props) => {
           <div className="col-lg-8">
             <div style={{ position: "relative" }}>
               <img className="title-img" src={photo} alt="Food" />
-              <div className="d-flex mark-recipe">
+              <div
+                className={`d-flex ${
+                  !profile.isLogin.payload
+                    ? "mark-recipe"
+                    : userId !== userIdRedux
+                    ? "mark-recipe"
+                    : "mark-recipe-delete"
+                }`}
+              >
                 <div onClick={maintenance}>
                   <img
                     className="like-logo"
@@ -92,8 +104,49 @@ const FoodRecipe = (props) => {
                   />
                 </div>
                 {/* {isHisRecipe && ( */}
-                <div>
-                  <img
+                {profile?.isLogin?.payload & (userId === userIdRedux) ? (
+                  <div>
+                    <img
+                      className="delete-logo"
+                      src="/images/delete-logo.webp"
+                      alt="Delete"
+                      onClick={() => {
+                        if (!profile?.isLogin?.payload) {
+                          Swal.fire({
+                            icon: "error",
+                            title: "Login required!",
+                            confirmButtonText: "OK",
+                            confirmButtonColor: "#ffc720",
+                          });
+                        } else {
+                          Swal.fire({
+                            title: "Are you sure?",
+                            text: "You won't be able to revert this!",
+                            icon: "warning",
+                            confirmButtonColor: "#ffc720",
+                            confirmButtonText: "Yes, delete it!",
+                            cancelButtonText: "No, cancel!",
+                            showCancelButton: true,
+                            reverseButtons: true,
+                          }).then((result) => {
+                            if (result.isConfirmed) {
+                              deleteRecipe();
+                            } else if (
+                              result.dismiss === Swal.DismissReason.cancel
+                            ) {
+                              Swal.fire({
+                                icon: "error",
+                                title: "Cancelled",
+                                text: "Your recipe will not be deleted",
+                                confirmButtonText: "OK",
+                                confirmButtonColor: "#ffc720",
+                              });
+                            }
+                          });
+                        }
+                      }}
+                    />
+                    {/* <img
                     className="delete-logo"
                     src="/images/delete-logo.webp"
                     alt="Delete"
@@ -140,8 +193,9 @@ const FoodRecipe = (props) => {
                         });
                       }
                     }}
-                  />
-                </div>
+                  /> */}
+                  </div>
+                ) : null}
                 {/* )} */}
               </div>
             </div>

@@ -27,42 +27,49 @@ const AddRecipe = () => {
       },
     };
 
-    let data = new FormData();
-    data.append("photo", photo);
-    data.append("title", title);
-    data.append("description", description);
-    data.append("ingredients", ingredients);
-    data.append("video", video);
+    if (video.slice(0, 30) !== "https://www.youtube.com/embed/") {
+      Swal.fire({
+        icon: "error",
+        title: "Your link must be use https or /embed like example",
+        confirmButtonText: "OK",
+        confirmButtonColor: "#ffc720",
+      });
+    } else {
+      let data = new FormData();
+      data.append("photo", photo);
+      data.append("title", title);
+      data.append("description", description);
+      data.append("ingredients", ingredients);
+      data.append("video", video);
 
-    axios
-      .post(`${process.env.REACT_APP_URL_BACKEND}/recipes/add`, data, config)
-      .then((res) => {
-        Swal.fire({
-          icon: "success",
-          title: `${res.data.message}`,
-          confirmButtonText: "OK",
-          confirmButtonColor: "#ffc720",
-        }).then((_res) => {
-          if (_res?.isConfirmed) {
-            window.scrollTo(0, 0);
-            refreshPage();
+      axios
+        .post(`${process.env.REACT_APP_URL_BACKEND}/recipes/add`, data, config)
+        .then((res) => {
+          Swal.fire({
+            icon: "success",
+            title: `${res.data.message}`,
+            confirmButtonText: "OK",
+            confirmButtonColor: "#ffc720",
+          }).then((_res) => {
+            if (_res?.isConfirmed) {
+              window.scrollTo(0, 0);
+              refreshPage();
+            }
+          });
+        })
+        .catch((err) => {
+          if (err.response.status === 401) {
+            localStorage.removeItem("persist:root");
+            navigate("/login");
+          } else {
+            Swal.fire({
+              icon: "error",
+              title: `${err.response.data.message}`,
+            });
           }
         });
-      })
-      .catch((err) => {
-        if (err.response.status === 401) {
-          localStorage.removeItem("persist:root");
-          navigate("/login");
-        } else {
-          Swal.fire({
-            icon: "error",
-            title: `${err.response.data.message}`,
-          });
-        }
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
+    }
+    setIsLoading(false);
   };
 
   const refreshPage = () => {
@@ -172,7 +179,7 @@ const AddRecipe = () => {
             type="text"
             className="form-control"
             id="exampleFormControlInput1"
-            placeholder="Enter your video link, example: https://www.youtube.com/embed/********"
+            placeholder="Enter your youtube link with embed, example: https://www.youtube.com/embed/********"
             onChange={(e) => {
               setVideo(e.target.value);
             }}
